@@ -1,0 +1,1 @@
+export const API_V1_BASE_URL = "https://apiv1.eventwhiz.site/api/v1";
