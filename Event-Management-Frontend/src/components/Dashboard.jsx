@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { authStatus } from "../redux/auth/authTypes";
 import { Navigate } from "react-router";
 
 export default function Dashboard() {
