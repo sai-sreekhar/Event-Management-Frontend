@@ -1,22 +1,20 @@
-import { Provider } from "react-redux";
 import "./App.css";
 import Login from "./components/Login";
-import store from "./redux/store";
 import { Route, Routes } from "react-router";
 import SignUp from "./components/Signup";
 import NoMatch from "./components/NoMatch";
 import Home from "./components/Home";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
-    <Provider store={store}>
-      <Routes>
-        <Route path="/" element={<Home></Home>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="*" element={<NoMatch></NoMatch>}></Route>
-      </Routes>
-    </Provider>
+    <Routes>
+      <Route path="/" element={<Home></Home>} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/dashboard" element={<Dashboard></Dashboard>} />
+      <Route path="*" element={<NoMatch></NoMatch>}></Route>
+    </Routes>
   );
 }
 
