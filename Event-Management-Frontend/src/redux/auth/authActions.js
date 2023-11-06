@@ -75,7 +75,7 @@ const signup = (name, email, contact, password) => {
       if (data.status === "success") {
         dispatch(signupSuccess(data.data.userData, data.data.accessToken));
       } else {
-        dispatch(signupFailure(data.data.error));
+        dispatch(signupFailure(data.data.errorDesc));
       }
     } catch (error) {
       dispatch(signupFailure(error.message));
@@ -101,7 +101,7 @@ const login = (email, password) => {
         console.log("Login success", data);
         dispatch(loginSuccess(data.data.userData, data.data.accessToken));
       } else {
-        dispatch(loginFailure(data.data.error));
+        dispatch(loginFailure(data.data.errorDesc));
       }
     } catch (error) {
       dispatch(loginFailure(error.message));
@@ -125,7 +125,7 @@ const logout = () => {
       if (data.status === "success") {
         dispatch(logoutSuccess());
       } else {
-        dispatch(logoutFailure(data.data.error));
+        dispatch(logoutFailure(data.data.errorDesc));
       }
     } catch (error) {
       dispatch(logoutFailure(error.message));
