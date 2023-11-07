@@ -26,6 +26,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function Login() {
   const [open, setOpen] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -33,6 +34,11 @@ export default function Login() {
     }
 
     setOpen(false);
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    return emailRegex.test(email);
   };
 
   const auth = useSelector((state) => state.auth);
@@ -46,7 +52,12 @@ export default function Login() {
     //   email: data.get("email"),
     //   password: data.get("password"),
     // });
-    dispatch(authActions.login(email, password));
+    if (!validateEmail(email)) {
+      setEmailError("Invalid email format");
+    } else {
+      setEmailError(""); // Clear the email error if it's valid
+      dispatch(authActions.login(email, password));
+    }
   };
 
   useEffect(() => {
@@ -104,6 +115,8 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                error={!!emailError}
+                helperText={emailError}
               />
               <TextField
                 margin="normal"
