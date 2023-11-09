@@ -15,11 +15,12 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { authActions } from "../redux";
+import { toCamelCase } from "../utils/toCamelCase";
 
 const pages = ["Host Event", "Browse Events"];
 const settings = ["Profile", "My Events", "My Bookings", "Logout"];
 
-function NavBar() {
+function DashboardNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -43,28 +44,29 @@ function NavBar() {
 
   const userMenuOnClickHandler = (setting) => () => {
     handleCloseUserMenu();
-    if (setting === "Profile") {
-      navigate("/profile");
-    } else if (setting === "My Events") {
-      navigate("/myEvents");
-    } else if (setting === "My Bookings") {
-      navigate("/myBookings");
-    } else if (setting === "Logout") {
-      dispatch(authActions.logout())
+    if (!setting) {
+      console.log("Invalid setting");
+      return;
+    }
+
+    if (setting === "Logout") {
+      dispatch(authActions.logout());
       navigate("/");
     } else {
-      navigate("/");
+      navigate(`/${toCamelCase(setting)}`);
     }
   };
 
   const navMenuOnClickHandler = (event) => {
     handleCloseNavMenu();
-    if (event.target.textContent === "Host Event") {
-      navigate("/hostEvent");
-    } else if (event.target.textContent === "Browse Events") {
-      navigate("/browseEvents");
+    const pageIndex = pages.findIndex(
+      (page) => event.target.textContent === page
+    );
+
+    if (pageIndex !== -1) {
+      navigate(`/${toCamelCase(pages[pageIndex])}`);
     } else {
-      navigate("/");
+      console.log("Invalid page index");
     }
   };
 
@@ -212,4 +214,4 @@ function NavBar() {
     </AppBar>
   );
 }
-export default NavBar;
+export default DashboardNavBar;
