@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux";
 import { apiStatus, authOperation, authStatus } from "../redux/auth/authTypes";
-import { Navigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import * as React from "react";
 import MuiAlert from "@mui/material/Alert";
 import { useState, useEffect } from "react";
@@ -27,6 +27,29 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Login() {
   const [open, setOpen] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const redirectPath = location.state?.path || "/";
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (
+      auth.apiStatus === apiStatus.FAILURE &&
+      auth.authOperation === authOperation.LOGIN &&
+      auth.authStatus === authStatus.NOT_LOGGED_IN
+    ) {
+      setOpen(true);
+    }
+
+    return () => {};
+  }, [auth.apiStatus, auth.authOperation, auth.authStatus]);
+
+  useEffect(() => {
+    if (auth.accessToken) {
+      navigate(redirectPath); // Redirect to the specified path if the user is already authenticated
+    }
+  }, [auth.accessToken]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -41,39 +64,18 @@ export default function Login() {
     return emailRegex.test(email);
   };
 
-  const auth = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
     if (!validateEmail(email)) {
       setEmailError("Invalid email format");
     } else {
-      setEmailError(""); // Clear the email error if it's valid
+      setEmailError("");
       dispatch(authActions.login(email, password));
     }
   };
-
-  useEffect(() => {
-    if (
-      auth.apiStatus === apiStatus.FAILURE &&
-      auth.authOperation === authOperation.LOGIN &&
-      auth.authStatus === authStatus.NOT_LOGGED_IN
-    ) {
-      setOpen(true);
-    }
-    return () => {};
-  }, [auth.apiStatus, auth.authOperation, auth.authStatus]);
-
-  if (auth.accessToken) {
-    return <Navigate to="/dashboard"></Navigate>;
-  }
 
   return (
     <div>
@@ -100,11 +102,7 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Login
             </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
