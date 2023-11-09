@@ -19,17 +19,22 @@ import Contact from "./components/Contact";
 function App() {
   const [navbarState, setNavbarState] = useState(0);
   const location = useLocation();
-  const homeNavbarRoutes = ["home", "services", "testinomials", "contact"];
+  const dashboardNavbarRoutes = [
+    "dashboard",
+    "browseEvents",
+    "hostEvent",
+    "profile",
+    "myEvents",
+    "myBookings",
+  ];
 
   useEffect(() => {
     const { pathname } = location;
     console.log("New path:", pathname);
-    if (pathname === "/") {
-      setNavbarState(0);
-    } else if (homeNavbarRoutes.includes(pathname.substring(1))) {
-      setNavbarState(0);
-    } else {
+    if (dashboardNavbarRoutes.includes(pathname.slice(1))) {
       setNavbarState(1);
+    } else {
+      setNavbarState(0);
     }
   }, [location]);
 
