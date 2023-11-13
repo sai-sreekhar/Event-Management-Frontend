@@ -78,7 +78,7 @@ function DashboardNavBar() {
   };
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* // This is the logo for the desktop view */}
