@@ -15,7 +15,7 @@ import {
 import imgUrl from "../assets/images/virat.jpg";
 import { apiStatus } from "../redux/events/eventTypes";
 import MuiAlert from "@mui/material/Alert";
-import { withAuth } from "../utils/withAuth";
+import { withAuth } from "./withAuth";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -62,7 +62,7 @@ function ViewEventDetails() {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      
+
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
