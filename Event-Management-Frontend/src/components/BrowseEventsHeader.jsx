@@ -14,7 +14,7 @@ function BrowseEventsHeader() {
         flexDirection: "column",
         justifyContent: "flex-end",
         alignItems: "center",
-        backgroundColor: "pink",
+        backgroundColor: "lightblue",
       }}
     >
       <Typography variant="h4" align="center">

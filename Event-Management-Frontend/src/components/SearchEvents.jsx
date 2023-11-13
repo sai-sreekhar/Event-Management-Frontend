@@ -10,52 +10,42 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
 
 const defaultTheme = createTheme();
 
 function SearchEvents() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrollY]);
-
   return (
     <Grid
       item
       xs={12}
       sm={6}
       md={3}
+      mt={1}
       sx={{
-        mt: 2,
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        backgroundColor: "lightblue",
+        backgroundColor: "lightcyan",
       }}
     >
-      <ThemeProvider theme={defaultTheme}>
-        <Container component="main" maxWidth="xs">
-          <Box
-            sx={{
-              position: "sticky",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              backgroundColor:"lightyellow"
-            }}
-          >
-            <Box sx={{ mt: 1 }}>
+      <div
+        style={{
+          position: "sticky",
+          height: "100px",
+          width: "100%",
+          top: "0px",
+        }}
+      >
+        <ThemeProvider theme={defaultTheme}>
+          <Container component="main" maxWidth="xs">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <TextField
                 margin="normal"
                 fullWidth
@@ -67,15 +57,14 @@ function SearchEvents() {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="Select Date"
-                  sx={{ mt: 1 }}
                   slotProps={{ textField: { fullWidth: true } }}
                   defaultValue={dayjs("2022-04-17")}
                 />
               </LocalizationProvider>
             </Box>
-          </Box>
-        </Container>
-      </ThemeProvider>
+          </Container>
+        </ThemeProvider>
+      </div>
     </Grid>
   );
 }

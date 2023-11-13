@@ -7,7 +7,13 @@ import GetAllEvents from "./GetAllEvents";
 const BrowseEvents = () => {
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        sx={{
+          height: "100vh",
+          overflowY: "scroll",
+        }}
+      >
         <BrowseEventsHeader />
         <SearchEvents />
         <GetAllEvents />
