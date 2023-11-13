@@ -11,6 +11,7 @@ import {
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { eventActions } from "../redux";
+import imgUrl from "../assets/images/virat.jpg";
 
 function GetAllEvents() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function GetAllEvents() {
                 <CardMedia
                   component="img"
                   height="140"
-                  image="/src/assets/images/virat.jpg"
+                  image={imgUrl}
                   alt="Event Image"
                 />
                 <CardContent>
