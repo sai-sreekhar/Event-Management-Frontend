@@ -21,6 +21,7 @@ function GetAllEvents() {
   }, []);
 
   return (
+    
     <Grid item xs={12} sm={6} md={9} mt={1}>
       <Grid container spacing={2} pl={2} pr={2}>
         {events.map((event) => (
