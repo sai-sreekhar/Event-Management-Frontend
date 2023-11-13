@@ -18,6 +18,7 @@ import imgUrl from "../assets/images/virat.jpg";
 import { apiStatus } from "../redux/events/eventTypes";
 import * as React from "react";
 import MuiAlert from "@mui/material/Alert";
+import { useNavigate } from "react-router";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -26,6 +27,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function GetAllEvents() {
   const [backdropOpen, setBackdropOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events);
@@ -36,6 +38,7 @@ function GetAllEvents() {
   useEffect(() => {
     if (events.apiStatus === apiStatus.IN_PROGRESS) {
       setBackdropOpen(true);
+      setSnackbarOpen(false);
     } else if (events.apiStatus === apiStatus.FAILURE) {
       setBackdropOpen(false);
       setSnackbarOpen(true);
@@ -97,7 +100,13 @@ function GetAllEvents() {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => {
+                      navigate(`/browseEvents/${event._id}`);
+                    }}
+                  >
                     View Details
                   </Button>
                 </CardActions>

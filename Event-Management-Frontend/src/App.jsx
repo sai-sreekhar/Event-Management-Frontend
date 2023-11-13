@@ -16,6 +16,7 @@ import Services from "./components/Services";
 import Testinomials from "./components/Testinomials";
 import Contact from "./components/Contact";
 import { Box } from "@mui/material";
+import ViewEventDetails from "./components/ViewEventDetails";
 
 function App() {
   const [navbarState, setNavbarState] = useState(0);
@@ -23,6 +24,7 @@ function App() {
   const dashboardNavbarRoutes = [
     "dashboard",
     "browseEvents",
+    "browseEvents/*",
     "hostEvent",
     "profile",
     "myEvents",
@@ -30,8 +32,7 @@ function App() {
   ];
 
   useEffect(() => {
-    const { pathname } = location;
-    if (dashboardNavbarRoutes.includes(pathname.slice(1))) {
+    if (dashboardNavbarRoutes.includes(location.pathname.split("/")[1])) {
       setNavbarState(1);
     } else {
       setNavbarState(0);
@@ -67,7 +68,11 @@ function App() {
             <Route
               path="/browseEvents"
               element={<BrowseEvents></BrowseEvents>}
-            />
+            ></Route>
+            <Route
+              path="/browseEvents/:eventId"
+              element={<ViewEventDetails></ViewEventDetails>}
+            ></Route>
             <Route path="/hostEvent" element={<HostEvent></HostEvent>}></Route>
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/myEvents" element={<MyEvents></MyEvents>}></Route>

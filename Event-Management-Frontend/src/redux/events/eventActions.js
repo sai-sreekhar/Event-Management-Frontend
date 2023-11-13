@@ -21,9 +21,28 @@ const getAllEventsFailure = (error) => {
   };
 };
 
+const getEventDetailsInProgress = () => {
+  return {
+    type: eventActions.GET_EVENT_DETAILS_IN_PROGRESS,
+  };
+};
+
+const getEventDetailsSuccess = (eventId, eventDetails) => {
+  return {
+    type: eventActions.GET_EVENT_DETAILS_SUCCESS,
+    payload: { eventId, eventDetails },
+  };
+};
+
+const getEventDetailsFailure = (error) => {
+  return {
+    type: eventActions.GET_EVENT_DETAILS_FAILURE,
+    payload: { error },
+  };
+};
+
 const getAllEvents = () => {
-  return async (dispatch, getState) => {
-    window.state = getState();
+  return async (dispatch) => {
     dispatch(getAllEventsInProgress());
     try {
       const response = await fetch(`${API_V1_BASE_URL}/events`);
@@ -39,4 +58,27 @@ const getAllEvents = () => {
   };
 };
 
-export { getAllEvents };
+const getEventDetails = (eventId) => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(getEventDetailsInProgress());
+    try {
+      const response = await fetch(`${API_V1_BASE_URL}/events/${eventId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await response.json();
+      console.log("data", data);
+      if (data.status === "success") {
+        dispatch(getEventDetailsSuccess(eventId, data.data.eventInfo));
+      } else {
+        dispatch(getEventDetailsFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(getEventDetailsFailure(error.message));
+    }
+  };
+};
+
+export { getAllEvents, getEventDetails };
