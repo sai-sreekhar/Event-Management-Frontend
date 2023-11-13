@@ -41,6 +41,25 @@ const getEventDetailsFailure = (error) => {
   };
 };
 
+const hostEventInProgress = () => {
+  return {
+    type: eventActions.HOST_EVENT_IN_PROGRESS,
+  };
+};
+
+const hostEventSuccess = () => {
+  return {
+    type: eventActions.HOST_EVENT_SUCCESS,
+  };
+};
+
+const hostEventFailure = (error) => {
+  return {
+    type: eventActions.HOST_EVENT_FAILURE,
+    payload: { error },
+  };
+};
+
 const getAllEvents = () => {
   return async (dispatch) => {
     dispatch(getAllEventsInProgress());
@@ -81,4 +100,28 @@ const getEventDetails = (eventId) => {
   };
 };
 
-export { getAllEvents, getEventDetails };
+const hostEvent = (eventDetails) => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(hostEventInProgress());
+    try {
+      const response = await fetch(`${API_V1_BASE_URL}/myEvents`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventDetails),
+      });
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(hostEventSuccess());
+      } else {
+        dispatch(hostEventFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(hostEventFailure(error.message));
+    }
+  };
+};
+export { getAllEvents, getEventDetails, hostEvent };
