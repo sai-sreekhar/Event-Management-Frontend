@@ -1,7 +1,8 @@
 import { apiStatus, authActions, authOperation, authStatus } from "./authTypes";
 
 const initialState = {
-  accessToken: null,
+  accessToken: 0,
+  abc: "string",
   apiStatus: apiStatus.IDLE,
   authOperation: authOperation.INVALID,
   authStatus: authStatus.NOT_LOGGED_IN,
@@ -13,6 +14,7 @@ export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case authActions.SIGNUP_IN_PROGRESS:
       return {
+        ...state,
         apiStatus: apiStatus.IN_PROGRESS,
         authOperation: authOperation.SIGNUP,
         authStatus: authStatus.NOT_LOGGED_IN,
@@ -22,6 +24,7 @@ export default function authReducer(state = initialState, action) {
       };
     case authActions.SIGNUP_SUCCESS:
       return {
+        ...state,
         apiStatus: apiStatus.SUCCESS,
         authOperation: authOperation.SIGNUP,
         authStatus: authStatus.LOGGED_IN,
@@ -31,6 +34,7 @@ export default function authReducer(state = initialState, action) {
       };
     case authActions.SIGNUP_FAILURE:
       return {
+        ...state,
         apiStatus: apiStatus.FAILURE,
         authOperation: authOperation.SIGNUP,
         authStatus: authStatus.NOT_LOGGED_IN,
@@ -40,6 +44,7 @@ export default function authReducer(state = initialState, action) {
       };
     case authActions.LOGIN_IN_PROGRESS:
       return {
+        ...state,
         apiStatus: apiStatus.IN_PROGRESS,
         authOperation: authOperation.LOGIN,
         authStatus: authStatus.NOT_LOGGED_IN,
@@ -49,6 +54,7 @@ export default function authReducer(state = initialState, action) {
       };
     case authActions.LOGIN_SUCCESS:
       return {
+        ...state,
         apiStatus: apiStatus.SUCCESS,
         authOperation: authOperation.LOGIN,
         authStatus: authStatus.LOGGED_IN,
@@ -58,6 +64,7 @@ export default function authReducer(state = initialState, action) {
       };
     case authActions.LOGIN_FAILURE:
       return {
+        ...state,
         apiStatus: apiStatus.FAILURE,
         authOperation: authOperation.LOGIN,
         authStatus: authStatus.NOT_LOGGED_IN,
@@ -75,6 +82,7 @@ export default function authReducer(state = initialState, action) {
       };
     case authActions.LOGOUT_SUCCESS:
       return {
+        ...state,
         apiStatus: apiStatus.SUCCESS,
         authOperation: authOperation.LOGOUT,
         authStatus: authStatus.NOT_LOGGED_IN,

@@ -18,6 +18,13 @@ const pages = ["Home", "Services", "Testinomials", "Contact", "Dashboard"];
 function HomeNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
+  const adbIconDesktopView = React.useMemo(() => {
+    return { display: { xs: "none", md: "flex" }, mr: 1 };
+  }, []);
+  const adbIconMobileView = React.useMemo(() => {
+    return { display: { xs: "flex", md: "none" }, mr: 1 };
+  }, []);
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -46,11 +53,11 @@ function HomeNavBar() {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* // This is the logo for the desktop view */}
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <AdbIcon sx={adbIconDesktopView} />
           <Typography
             variant="h6"
             noWrap
@@ -114,7 +121,7 @@ function HomeNavBar() {
           </Box>
 
           {/*This is the logo for the mobile view */}
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <AdbIcon sx={adbIconMobileView} />
           <Typography
             variant="h5"
             noWrap

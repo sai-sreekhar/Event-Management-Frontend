@@ -85,9 +85,7 @@ const signup = (name, email, contact, password) => {
 
 const login = (email, password) => {
   return async (dispatch) => {
-    console.log("calling dispatch login in progress");
     dispatch(loginInProgress());
-    console.log("dispatch login in progress called");
     try {
       const response = await fetch(`${API_V1_BASE_URL}/auth/login`, {
         method: "POST",
@@ -98,7 +96,6 @@ const login = (email, password) => {
       });
       const data = await response.json();
       if (data.status === "success") {
-        console.log("Login success", data);
         dispatch(loginSuccess(data.data.userData, data.data.accessToken));
       } else {
         dispatch(loginFailure(data.data.errorDesc));

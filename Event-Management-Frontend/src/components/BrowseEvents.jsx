@@ -1,14 +1,19 @@
-import { useSelector } from "react-redux";
 import withAuth from "./withAuth";
+import { Grid } from "@mui/material";
+import BrowseEventsHeader from "./BrowseEventsHeader";
+import SearchEvents from "./SearchEvents";
+import GetAllEvents from "./GetAllEvents";
 
 const BrowseEvents = () => {
-  const auth = useSelector((state) => state.auth);
   return (
-    <div>
-      <h1>Browse Events Page</h1>
-      <h2>Welcome {auth.userData.name}</h2>
-    </div>
+    <>
+      <Grid container spacing={2}>
+        <BrowseEventsHeader />
+        <SearchEvents />
+        <GetAllEvents />
+      </Grid>
+    </>
   );
-}
+};
 
 export default withAuth(BrowseEvents);

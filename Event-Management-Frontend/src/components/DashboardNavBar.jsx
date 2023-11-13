@@ -25,6 +25,13 @@ function DashboardNavBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const adbIconDesktopView = React.useMemo(() => {
+    return { display: { xs: "none", md: "flex" }, mr: 1 };
+  }, []);
+  const adbIconMobileView = React.useMemo(() => {
+    return { display: { xs: "flex", md: "none" }, mr: 1 };
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -71,11 +78,11 @@ function DashboardNavBar() {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* // This is the logo for the desktop view */}
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <AdbIcon sx={adbIconDesktopView} />
           <Typography
             variant="h6"
             noWrap
@@ -139,7 +146,7 @@ function DashboardNavBar() {
           </Box>
 
           {/*This is the logo for the mobile view */}
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <AdbIcon sx={adbIconMobileView} />
           <Typography
             variant="h5"
             noWrap

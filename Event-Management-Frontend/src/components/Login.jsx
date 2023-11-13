@@ -49,7 +49,7 @@ export default function Login() {
     if (auth.accessToken) {
       navigate(redirectPath); // Redirect to the specified path if the user is already authenticated
     }
-  }, [auth.accessToken]);
+  }, [auth]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {

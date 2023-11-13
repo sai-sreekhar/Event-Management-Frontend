@@ -6,7 +6,6 @@ function NoMatch() {
   const navigate = useNavigate();
 
   const routeToHome = () => {
-    console.log("Inside routeToHome");
     navigate("/");
   };
 

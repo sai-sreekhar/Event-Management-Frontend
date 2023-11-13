@@ -1,13 +1,13 @@
 export const authActions = {
-  SIGNUP_IN_PROGRESS: 0,
-  SIGNUP_SUCCESS: 1,
-  SIGNUP_FAILURE: 2,
-  LOGIN_IN_PROGRESS: 3,
-  LOGIN_SUCCESS: 4,
-  LOGIN_FAILURE: 5,
-  LOGOUT_IN_PROGRESS: 6,
-  LOGOUT_SUCCESS: 7,
-  LOGOUT_FAILURE: 8,
+  SIGNUP_IN_PROGRESS: '@auth/signupInProgress',
+  SIGNUP_SUCCESS: '@auth/signupSuccess',
+  SIGNUP_FAILURE: '@auth/signupFailure',
+  LOGIN_IN_PROGRESS: '@auth/loginInProgress',
+  LOGIN_SUCCESS: '@auth/loginSuccess',
+  LOGIN_FAILURE: '@auth/loginFailure',
+  LOGOUT_IN_PROGRESS: '@auth/logoutInProgress',
+  LOGOUT_SUCCESS: '@auth/logoutSuccess',
+  LOGOUT_FAILURE: '@auth/logoutFailure',
 };
 
 export const apiStatus = {

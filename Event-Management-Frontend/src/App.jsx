@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import Services from "./components/Services";
 import Testinomials from "./components/Testinomials";
 import Contact from "./components/Contact";
+import { Box } from "@mui/material";
 
 function App() {
   const [navbarState, setNavbarState] = useState(0);
@@ -30,7 +31,6 @@ function App() {
 
   useEffect(() => {
     const { pathname } = location;
-    console.log("New path:", pathname);
     if (dashboardNavbarRoutes.includes(pathname.slice(1))) {
       setNavbarState(1);
     } else {
@@ -41,24 +41,50 @@ function App() {
   return (
     <>
       <NavbarController type={navbarState}></NavbarController>
-      <Routes>
-        <Route path="/" element={<Home></Home>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/dashboard" element={<Dashboard></Dashboard>} />
-        <Route path="/browseEvents" element={<BrowseEvents></BrowseEvents>} />
-        <Route path="/hostEvent" element={<HostEvent></HostEvent>}></Route>
-        <Route path="/profile" element={<Profile></Profile>}></Route>
-        <Route path="/myEvents" element={<MyEvents></MyEvents>}></Route>
-        <Route path="/myBookings" element={<MyBookings></MyBookings>}></Route>
-        <Route path="/services" element={<Services></Services>}></Route>
-        <Route
-          path="/testinomials"
-          element={<Testinomials></Testinomials>}
-        ></Route>
-        <Route path="/contact" element={<Contact></Contact>}></Route>
-        <Route path="*" element={<NoMatch></NoMatch>}></Route>
-      </Routes>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "95%",
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Home></Home>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/dashboard" element={<Dashboard></Dashboard>} />
+            <Route
+              path="/browseEvents"
+              element={<BrowseEvents></BrowseEvents>}
+            />
+            <Route path="/hostEvent" element={<HostEvent></HostEvent>}></Route>
+            <Route path="/profile" element={<Profile></Profile>}></Route>
+            <Route path="/myEvents" element={<MyEvents></MyEvents>}></Route>
+            <Route
+              path="/myBookings"
+              element={<MyBookings></MyBookings>}
+            ></Route>
+            <Route path="/services" element={<Services></Services>}></Route>
+            <Route
+              path="/testinomials"
+              element={<Testinomials></Testinomials>}
+            ></Route>
+            <Route path="/contact" element={<Contact></Contact>}></Route>
+            <Route path="*" element={<NoMatch></NoMatch>}></Route>
+          </Routes>
+        </Box>
+      </Box>
     </>
   );
 }
