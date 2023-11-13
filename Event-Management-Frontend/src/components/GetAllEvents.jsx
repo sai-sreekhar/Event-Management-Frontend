@@ -80,7 +80,11 @@ function GetAllEvents() {
           {events.events.map((event) => (
             <Grid item xs={12} sm={6} md={3} key={event._id}>
               <Card>
-                <CardActionArea>
+                <CardActionArea
+                  onClick={() => {
+                    navigate(`/browseEvents/${event._id}`);
+                  }}
+                >
                   <CardMedia
                     component="img"
                     height="140"
