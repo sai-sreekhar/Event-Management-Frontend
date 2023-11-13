@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { eventActions } from "../redux";
 import {
   Backdrop,
   Box,
-  Button,
   CardMedia,
   CircularProgress,
   Grid,
@@ -13,9 +12,10 @@ import {
   Typography,
 } from "@mui/material";
 import imgUrl from "../assets/images/virat.jpg";
-import { apiStatus } from "../redux/events/eventTypes";
+import { apiStatus, eventOperations } from "../redux/events/eventTypes";
 import MuiAlert from "@mui/material/Alert";
-import withAuth  from "./withAuth";
+import withAuth from "./withAuth";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -28,23 +28,52 @@ function ViewEventDetails() {
   const dispatch = useDispatch();
   const eventId = params.eventId;
   const events = useSelector((state) => state.events);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(eventActions.getEventDetails(eventId));
   }, []);
 
   useEffect(() => {
-    if (events.apiStatus === apiStatus.IN_PROGRESS) {
+    if (
+      events.apiStatus === apiStatus.IN_PROGRESS &&
+      events.eventOperation === eventOperations.GET_EVENT_DETAILS
+    ) {
       setBackdropOpen(true);
       setSnackbarOpen(false);
-    } else if (events.apiStatus === apiStatus.FAILURE) {
+    } else if (
+      events.apiStatus === apiStatus.FAILURE &&
+      events.eventOperation === eventOperations.GET_EVENT_DETAILS
+    ) {
       setBackdropOpen(false);
       setSnackbarOpen(true);
-    } else {
+    } else if (
+      events.apiStatus === apiStatus.SUCCESS &&
+      events.eventOperation === eventOperations.GET_EVENT_DETAILS
+    ) {
+      setBackdropOpen(false);
+      setSnackbarOpen(false);
+    } else if (
+      events.apiStatus === apiStatus.FAILURE &&
+      events.eventOperation === eventOperations.BUY_TICKET
+    ) {
+      setBackdropOpen(false);
+      setSnackbarOpen(true);
+    } else if (
+      events.apiStatus === apiStatus.SUCCESS &&
+      events.eventOperation === eventOperations.BUY_TICKET
+    ) {
+      setBackdropOpen(false);
+      setSnackbarOpen(false);
+      navigate("/myBookings");
+    } else if (
+      events.apiStatus === apiStatus.IN_PROGRESS &&
+      events.eventOperation === eventOperations.BUY_TICKET
+    ) {
       setBackdropOpen(false);
       setSnackbarOpen(false);
     }
-  }, [events.apiStatus]);
+  }, [events.apiStatus, events.eventOperation]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -52,6 +81,10 @@ function ViewEventDetails() {
     }
 
     setSnackbarOpen(false);
+  };
+
+  const buyTicketHandler = () => {
+    dispatch(eventActions.buyTicket(eventId));
   };
 
   return (
@@ -130,9 +163,18 @@ function ViewEventDetails() {
                 <b>Email: </b>
                 {events.eventDetails[eventId].hostEmail}
               </Typography>
-              <Button variant="contained" color="primary" fullWidth >
+              <LoadingButton
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={buyTicketHandler}
+                loading={
+                  events.apiStatus === apiStatus.IN_PROGRESS &&
+                  events.eventOperation === eventOperations.BUY_TICKET
+                }
+              >
                 BUY TICKET
-              </Button>
+              </LoadingButton>
             </Box>
           </Grid>
         </Grid>

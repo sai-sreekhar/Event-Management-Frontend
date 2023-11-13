@@ -8,7 +8,7 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { eventActions } from "../redux";
 import React, { useEffect, useState } from "react";
-import { apiStatus } from "../redux/events/eventTypes";
+import { apiStatus, eventOperations } from "../redux/events/eventTypes";
 import MuiAlert from "@mui/material/Alert";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -24,12 +24,15 @@ function HostEvent() {
   const events = useSelector((state) => state.events);
 
   useEffect(() => {
-    if (events.apiStatus === apiStatus.FAILURE) {
+    if (
+      events.apiStatus === apiStatus.FAILURE &&
+      events.eventOperation === eventOperations.HOST_EVENT
+    ) {
       setSnackbarOpen(true);
     } else {
       setSnackbarOpen(false);
     }
-  }, [events.apiStatus]);
+  }, [events.apiStatus, events.eventOperation]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,7 +59,7 @@ function HostEvent() {
   };
 
   const handleDateTimeChange = (newValue) => {
-    setDateTime(newValue.$d.getTime() / 1000);
+    setDateTime(newValue.$d.getTime());
     console.log(dateTime);
   };
 
@@ -71,7 +74,7 @@ function HostEvent() {
           {events.errorReason}
         </Alert>
       </Snackbar>
-      
+
       <Grid
         container
         component="form"
@@ -199,7 +202,10 @@ function HostEvent() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            loading={events.apiStatus === apiStatus.IN_PROGRESS}
+            loading={
+              events.apiStatus === apiStatus.IN_PROGRESS &&
+              events.eventOperation === eventOperations.HOST_EVENT
+            }
           >
             Host Event
           </LoadingButton>

@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { eventActions } from "../redux";
 import imgUrl from "../assets/images/virat.jpg";
-import { apiStatus } from "../redux/events/eventTypes";
+import { apiStatus, eventOperations } from "../redux/events/eventTypes";
 import * as React from "react";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router";
@@ -36,17 +36,26 @@ function GetAllEvents() {
   }, []);
 
   useEffect(() => {
-    if (events.apiStatus === apiStatus.IN_PROGRESS) {
+    if (
+      events.apiStatus === apiStatus.IN_PROGRESS &&
+      events.eventOperation === eventOperations.GET_ALL_EVENTS
+    ) {
       setBackdropOpen(true);
       setSnackbarOpen(false);
-    } else if (events.apiStatus === apiStatus.FAILURE) {
+    } else if (
+      events.apiStatus === apiStatus.FAILURE &&
+      events.eventOperation === eventOperations.GET_ALL_EVENTS
+    ) {
       setBackdropOpen(false);
       setSnackbarOpen(true);
-    } else {
+    } else if (
+      events.apiStatus === apiStatus.SUCCESS &&
+      events.eventOperation === eventOperations.GET_ALL_EVENTS
+    ) {
       setBackdropOpen(false);
       setSnackbarOpen(false);
     }
-  }, [events.apiStatus]);
+  }, [events.apiStatus, events.eventOperation]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -99,7 +108,7 @@ function GetAllEvents() {
                       {event.location}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {new Date(event.date * 1000).toString()}
+                      {new Date(Number(event.date)).toUTCString()}
                     </Typography>
                   </CardContent>
                 </CardActionArea>

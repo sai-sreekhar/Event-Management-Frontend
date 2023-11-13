@@ -8,6 +8,9 @@ export const eventActions = {
   HOST_EVENT_IN_PROGRESS: "@event/hostEventInProgress",
   HOST_EVENT_SUCCESS: "@event/hostEventSuccess",
   HOST_EVENT_FAILURE: "@event/hostEventFailure",
+  BUY_TICKET_IN_PROGRESS: "@event/buyTicketInProgress",
+  BUY_TICKET_SUCCESS: "@event/buyTicketSuccess",
+  BUY_TICKET_FAILURE: "@event/buyTicketFailure",
 };
 
 export const apiStatus = {
@@ -16,3 +19,11 @@ export const apiStatus = {
   FAILURE: 2,
   IDLE: 3,
 };
+
+export const eventOperations = {
+  GET_ALL_EVENTS: "getAllEvents",
+  GET_EVENT_DETAILS: "getEventDetails",
+  HOST_EVENT: "hostEvent",
+  BUY_TICKET: "buyTicket",
+  INVALID: "invalid",
+}

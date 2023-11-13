@@ -60,6 +60,25 @@ const hostEventFailure = (error) => {
   };
 };
 
+const buyTicketInProgress = () => {
+  return {
+    type: eventActions.BUY_TICKET_IN_PROGRESS,
+  };
+};
+
+const buyTicketSuccess = () => {
+  return {
+    type: eventActions.BUY_TICKET_SUCCESS,
+  };
+};
+
+const buyTicketFailure = (error) => {
+  return {
+    type: eventActions.BUY_TICKET_FAILURE,
+    payload: { error },
+  };
+};
+
 const getAllEvents = () => {
   return async (dispatch) => {
     dispatch(getAllEventsInProgress());
@@ -124,4 +143,30 @@ const hostEvent = (eventDetails) => {
     }
   };
 };
-export { getAllEvents, getEventDetails, hostEvent };
+
+const buyTicket = (eventId) => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(buyTicketInProgress());
+    try {
+      const response = await fetch(
+        `${API_V1_BASE_URL}/registrations/${eventId}/`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(buyTicketSuccess());
+      } else {
+        dispatch(buyTicketFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(buyTicketFailure(error.message));
+    }
+  };
+};
+export { getAllEvents, getEventDetails, hostEvent, buyTicket };

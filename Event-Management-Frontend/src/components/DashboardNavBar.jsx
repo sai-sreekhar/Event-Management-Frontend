@@ -61,7 +61,7 @@ function DashboardNavBar() {
       navigate("/");
     } else {
       navigate(`/${toCamelCase(setting)}`);
-    }
+    } 
   };
 
   const navMenuOnClickHandler = (event) => {
