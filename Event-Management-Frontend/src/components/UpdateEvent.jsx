@@ -28,6 +28,7 @@ function UpdateEvent() {
   const [dateTime, setDateTime] = useState(0);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [backdropOpen, setBackdropOpen] = useState(false);
+  const [dataTimeError, setDateTimeError] = useState(false);
   const params = useParams();
   const eventId = params.eventId;
   const navigate = useNavigate();
@@ -85,6 +86,11 @@ function UpdateEvent() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (dateTime < Date.now()) {
+      setDateTimeError(true);
+      return;
+    }
+
     const data = new FormData(event.currentTarget);
     console.log(data);
     const eventDetails = {
@@ -128,6 +134,16 @@ function UpdateEvent() {
       >
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           {events.errorReason}
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={dataTimeError}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {"Date and Time cannot be in the past"}
         </Alert>
       </Snackbar>
 

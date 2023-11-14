@@ -20,6 +20,7 @@ function HostEvent() {
   const auth = useSelector((state) => state.auth);
   const [dateTime, setDateTime] = useState(0);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [dataTimeError, setDateTimeError] = useState(false); // eslint-disable-line no-unused-vars
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -42,8 +43,12 @@ function HostEvent() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(dateTime);
+    if (dateTime < Date.now()) {
+      setDateTimeError(true);
+      return;
+    }
     const data = new FormData(event.currentTarget);
-    console.log(data);
     const eventDetails = {
       name: data.get("title"),
       location: data.get("location"),
@@ -66,7 +71,6 @@ function HostEvent() {
 
   const handleDateTimeChange = (newValue) => {
     setDateTime(newValue.$d.getTime());
-    console.log(dateTime);
   };
 
   return (
@@ -78,6 +82,16 @@ function HostEvent() {
       >
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           {events.errorReason}
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={dataTimeError}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {"Date and Time cannot be in the past"}
         </Alert>
       </Snackbar>
 

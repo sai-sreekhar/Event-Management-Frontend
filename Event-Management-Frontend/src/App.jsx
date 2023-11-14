@@ -83,6 +83,7 @@ function App() {
               path="/myBookings"
               element={<MyBookings></MyBookings>}
             ></Route>
+            <Route path="/myEvents" element={<MyEvents></MyEvents>}></Route>
             <Route path="/services" element={<Services></Services>}></Route>
             <Route
               path="/testinomials"
