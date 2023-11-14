@@ -17,6 +17,7 @@ import Testinomials from "./components/Testinomials";
 import Contact from "./components/Contact";
 import { Box } from "@mui/material";
 import ViewEventDetails from "./components/ViewEventDetails";
+import UpdateEvent from "./components/UpdateEvent";
 
 function App() {
   const [navbarState, setNavbarState] = useState(0);
@@ -76,6 +77,7 @@ function App() {
             <Route path="/hostEvent" element={<HostEvent></HostEvent>}></Route>
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/myEvents" element={<MyEvents></MyEvents>}></Route>
+            <Route path="/updateEvent/:eventId" element={<UpdateEvent></UpdateEvent>}></Route>
             <Route
               path="/myBookings"
               element={<MyBookings></MyBookings>}

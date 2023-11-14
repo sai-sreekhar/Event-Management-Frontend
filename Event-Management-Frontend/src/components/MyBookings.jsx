@@ -15,6 +15,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const MyBookings = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false);
+  const [eventBookingIdToDelete, setEventBookingIdToDelete] = useState(null);
 
   const events = useSelector((state) => state.events);
   const dispatch = useDispatch();
@@ -132,6 +133,7 @@ const MyBookings = () => {
             fullWidth
             variant="contained"
             onClick={() => {
+              setEventBookingIdToDelete(params.value);
               dispatch(eventActions.deleteEventBooking(params.value));
             }}
             sx={{
@@ -144,7 +146,8 @@ const MyBookings = () => {
             }}
             loading={
               events.apiStatus === apiStatus.IN_PROGRESS &&
-              events.eventOperation === eventOperations.DELETE_EVENT_BOOKING
+              events.eventOperation === eventOperations.DELETE_EVENT_BOOKING &&
+              eventBookingIdToDelete === params.value
             }
           >
             Delete Registration
@@ -208,7 +211,7 @@ const MyBookings = () => {
             boxShadow: 2,
             border: 2,
             borderColor: "primary.light",
-            backgroundColor: "lightcyan"
+            backgroundColor: "lightcyan",
           }}
           {...formattedData}
           loading={

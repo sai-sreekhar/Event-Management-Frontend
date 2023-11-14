@@ -118,6 +118,45 @@ const deleteEventBookingFailure = (error) => {
   };
 };
 
+const deleteMyHostedEventInProgress = () => {
+  return {
+    type: eventActions.DELETE_MY_HOSTED_EVENT_IN_PROGRESS,
+  };
+};
+
+const deleteMyHostedEventSuccess = () => {
+  return {
+    type: eventActions.DELETE_MY_HOSTED_EVENT_SUCCESS,
+  };
+};
+
+const deleteMyHostedEventFailure = (error) => {
+  return {
+    type: eventActions.DELETE_MY_HOSTED_EVENT_FAILURE,
+    payload: { error },
+  };
+};
+
+const getMyHostedEventsInProgress = () => {
+  return {
+    type: eventActions.GET_MY_HOSTED_EVENTS_IN_PROGRESS,
+  };
+};
+
+const getMyHostedEventsSuccess = (myHostedEvents) => {
+  return {
+    type: eventActions.GET_MY_HOSTED_EVENTS_SUCCESS,
+    payload: { myHostedEvents },
+  };
+};
+
+const getMyHostedEventsFailure = (error) => {
+  return {
+    type: eventActions.GET_MY_HOSTED_EVENTS_FAILURE,
+    payload: { error },
+  };
+};
+
 const getAllEvents = () => {
   return async (dispatch) => {
     dispatch(getAllEventsInProgress());
@@ -146,7 +185,6 @@ const getEventDetails = (eventId) => {
         },
       });
       const data = await response.json();
-      console.log("data", data);
       if (data.status === "success") {
         dispatch(getEventDetailsSuccess(eventId, data.data.eventInfo));
       } else {
@@ -257,4 +295,58 @@ const deleteEventBooking = (eventId) => {
   };
 };
 
-export { getAllEvents, getEventDetails, hostEvent, buyTicket, getAllBookings, deleteEventBooking};
+const getMyHostedEvents = () => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(getMyHostedEventsInProgress());
+    try {
+      const response = await fetch(`${API_V1_BASE_URL}/myEvents`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(getMyHostedEventsSuccess(data.data.myHostedEvents));
+      } else {
+        dispatch(getMyHostedEventsFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(getMyHostedEventsFailure(error.message));
+    }
+  };
+};
+
+const deleteMyHostedEvent = (eventId) => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(deleteMyHostedEventInProgress());
+    try {
+      const response = await fetch(`${API_V1_BASE_URL}/myEvents/${eventId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(deleteMyHostedEventSuccess());
+      } else {
+        dispatch(deleteMyHostedEventFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(deleteMyHostedEventFailure(error.message));
+    }
+  };
+};
+
+export {
+  getAllEvents,
+  getEventDetails,
+  hostEvent,
+  buyTicket,
+  getAllBookings,
+  deleteEventBooking,
+  getMyHostedEvents,
+  deleteMyHostedEvent,
+};

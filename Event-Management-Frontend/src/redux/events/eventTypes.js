@@ -17,6 +17,12 @@ export const eventActions = {
   DELETE_EVENT_BOOKING_IN_PROGRESS: "@event/deleteEventBookingInProgress",
   DELETE_EVENT_BOOKING_SUCCESS: "@event/deleteEventBookingSuccess",
   DELETE_EVENT_BOOKING_FAILURE: "@event/deleteEventBookingFailure",
+  GET_MY_HOSTED_EVENTS_IN_PROGRESS: "@event/getMyHostedEventsInProgress",
+  GET_MY_HOSTED_EVENTS_SUCCESS: "@event/getMyHostedEventsSuccess",
+  GET_MY_HOSTED_EVENTS_FAILURE: "@event/getMyHostedEventsFailure",
+  DELETE_MY_HOSTED_EVENT_IN_PROGRESS: "@event/deleteMyHostedEventInProgress",
+  DELETE_MY_HOSTED_EVENT_SUCCESS: "@event/deleteMyHostedEventSuccess",
+  DELETE_MY_HOSTED_EVENT_FAILURE: "@event/deleteMyHostedEventFailure",
 };
 
 export const apiStatus = {
@@ -33,5 +39,7 @@ export const eventOperations = {
   BUY_TICKET: "buyTicket",
   GET_ALL_BOOKINGS: "getAllBookings",
   DELETE_EVENT_BOOKING: "deleteEventBooking",
+  GET_MY_HOSTED_EVENTS: "getMyHostedEvents",
+  DELETE_MY_HOSTED_EVENT: "deleteMyHostedEvent",
   INVALID: "invalid",
 };

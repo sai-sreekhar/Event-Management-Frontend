@@ -6,6 +6,7 @@ const initialState = {
   errorReason: null,
   eventDetails: {},
   bookedEvents: [],
+  myHostedEvents: [],
   eventOperation: eventOperations.INVALID,
 };
 
@@ -141,6 +142,49 @@ export default function eventReducer(state = initialState, action) {
         ...state,
         apiStatus: apiStatus.FAILURE,
         eventOperation: eventOperations.DELETE_EVENT_BOOKING,
+        errorReason: action.payload.error,
+      };
+    case eventActions.GET_MY_HOSTED_EVENTS_IN_PROGRESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.IN_PROGRESS,
+        eventOperation: eventOperations.GET_MY_HOSTED_EVENTS,
+        errorReason: null,
+      };
+    case eventActions.GET_MY_HOSTED_EVENTS_SUCCESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.SUCCESS,
+        eventOperation: eventOperations.GET_MY_HOSTED_EVENTS,
+        myHostedEvents: action.payload.myHostedEvents,
+        errorReason: null,
+      };
+    case eventActions.GET_MY_HOSTED_EVENTS_FAILURE:
+      return {
+        ...state,
+        apiStatus: apiStatus.FAILURE,
+        eventOperation: eventOperations.GET_MY_HOSTED_EVENTS,
+        errorReason: action.payload.error,
+      };
+    case eventActions.DELETE_MY_HOSTED_EVENT_IN_PROGRESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.IN_PROGRESS,
+        eventOperation: eventOperations.DELETE_MY_HOSTED_EVENT,
+        errorReason: null,
+      };
+    case eventActions.DELETE_MY_HOSTED_EVENT_SUCCESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.SUCCESS,
+        eventOperation: eventOperations.DELETE_MY_HOSTED_EVENT,
+        errorReason: null,
+      };
+    case eventActions.DELETE_MY_HOSTED_EVENT_FAILURE:
+      return {
+        ...state,
+        apiStatus: apiStatus.FAILURE,
+        eventOperation: eventOperations.DELETE_MY_HOSTED_EVENT,
         errorReason: action.payload.error,
       };
     default:
