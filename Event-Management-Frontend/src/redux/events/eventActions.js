@@ -176,6 +176,26 @@ const updateEventFailure = (error) => {
   };
 };
 
+const getHostedEventRegistrationsInProgress = () => {
+  return {
+    type: eventActions.GET_HOSTED_EVENT_REGISTRATIONS_IN_PROGRESS,
+  };
+};
+
+const getHostedEventRegistrationsSuccess = (eventId, eventRegistrations) => {
+  return {
+    type: eventActions.GET_HOSTED_EVENT_REGISTRATIONS_SUCCESS,
+    payload: { eventId, eventRegistrations },
+  };
+};
+
+const getHostedEventRegistrationsFailure = (error) => {
+  return {
+    type: eventActions.GET_HOSTED_EVENT_REGISTRATIONS_FAILURE,
+    payload: { error },
+  };
+};
+
 const getAllEvents = () => {
   return async (dispatch) => {
     dispatch(getAllEventsInProgress());
@@ -384,6 +404,36 @@ const updateEvent = (eventId, eventDetails) => {
   };
 };
 
+const getHostedEventRegistrations = (eventId) => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(getHostedEventRegistrationsInProgress());
+    try {
+      const response = await fetch(
+        `${API_V1_BASE_URL}/myEvents/registrations/${eventId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(
+          getHostedEventRegistrationsSuccess(
+            eventId,
+            data.data.myEventRegistrations
+          )
+        );
+      } else {
+        dispatch(getHostedEventRegistrationsFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(getHostedEventRegistrationsFailure(error.message));
+    }
+  };
+};
+
 export {
   getAllEvents,
   getEventDetails,
@@ -394,4 +444,5 @@ export {
   getMyHostedEvents,
   deleteMyHostedEvent,
   updateEvent,
+  getHostedEventRegistrations,
 };

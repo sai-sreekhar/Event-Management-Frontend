@@ -26,6 +26,9 @@ export const eventActions = {
   UPDATE_EVENT_IN_PROGRESS: "@event/updateEventInProgress",
   UPDATE_EVENT_SUCCESS: "@event/updateEventSuccess",
   UPDATE_EVENT_FAILURE: "@event/updateEventFailure",
+  GET_HOSTED_EVENT_REGISTRATIONS_IN_PROGRESS: "@event/getHostedEventRegistrationsInProgress",
+  GET_HOSTED_EVENT_REGISTRATIONS_SUCCESS: "@event/getHostedEventRegistrationsSuccess",
+  GET_HOSTED_EVENT_REGISTRATIONS_FAILURE: "@event/getHostedEventRegistrationsFailure",
 };
 
 export const apiStatus = {
@@ -45,5 +48,6 @@ export const eventOperations = {
   GET_MY_HOSTED_EVENTS: "getMyHostedEvents",
   DELETE_MY_HOSTED_EVENT: "deleteMyHostedEvent",
   UPDATE_EVENT: "updateEvent",
+  GET_HOSTED_EVENT_REGISTRATIONS: "getHostedEventRegistrations",
   INVALID: "invalid",
 };

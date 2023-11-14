@@ -18,6 +18,7 @@ import Contact from "./components/Contact";
 import { Box } from "@mui/material";
 import ViewEventDetails from "./components/ViewEventDetails";
 import UpdateEvent from "./components/UpdateEvent";
+import EventRegistrations from "./components/EventRegistrations";
 
 function App() {
   const [navbarState, setNavbarState] = useState(0);
@@ -30,7 +31,7 @@ function App() {
     "profile",
     "myEvents",
     "myBookings",
-    "updateEvent"
+    "updateEvent",
   ];
 
   useEffect(() => {
@@ -78,12 +79,18 @@ function App() {
             <Route path="/hostEvent" element={<HostEvent></HostEvent>}></Route>
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/myEvents" element={<MyEvents></MyEvents>}></Route>
-            <Route path="/updateEvent/:eventId" element={<UpdateEvent></UpdateEvent>}></Route>
+            <Route
+              path="/updateEvent/:eventId"
+              element={<UpdateEvent></UpdateEvent>}
+            ></Route>
             <Route
               path="/myBookings"
               element={<MyBookings></MyBookings>}
             ></Route>
-            <Route path="/myEvents" element={<MyEvents></MyEvents>}></Route>
+            <Route
+              path="/myEvents/registrations/:eventId"
+              element={<EventRegistrations></EventRegistrations>}
+            ></Route>
             <Route path="/services" element={<Services></Services>}></Route>
             <Route
               path="/testinomials"

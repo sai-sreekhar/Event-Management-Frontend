@@ -16,6 +16,97 @@ const MyBookings = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false);
   const [eventBookingIdToDelete, setEventBookingIdToDelete] = useState(null);
+  const [formattedData, setFormattedData] = useState({
+    columns: [
+      {
+        field: "id",
+        hide: true,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        editable: false,
+        field: "bookedOn",
+        headerName: "Booked On",
+        width: 250,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        editable: false,
+        field: "eventName",
+        headerName: "Event Name",
+        width: 250,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        editable: false,
+        field: "eventDate",
+        headerName: "Event Date",
+        width: 250,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        editable: false,
+        field: "eventLocation",
+        headerName: "Event Location",
+        width: 250,
+        headerAlign: "center",
+        align: "center",
+      },
+      {
+        editable: false,
+        field: "viewEvent",
+        headerName: "View Event",
+        width: 250,
+        align: "center",
+        renderCell: (params) => {
+          return <a href={`/browseEvents/${params.value}`}>View Event</a>;
+        },
+        headerAlign: "center",
+      },
+      {
+        editable: false,
+        field: "deleteRegistration",
+        headerName: "Delete Booking",
+        width: 200,
+        align: "center",
+        renderCell: (params) => {
+          return (
+            <LoadingButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              onClick={() => {
+                setEventBookingIdToDelete(params.value);
+                dispatch(eventActions.deleteEventBooking(params.value));
+              }}
+              sx={{
+                mt: 3,
+                mb: 3,
+                backgroundColor: "red",
+                ":hover": {
+                  backgroundColor: "red",
+                },
+              }}
+              loading={
+                events.apiStatus === apiStatus.IN_PROGRESS &&
+                events.eventOperation ===
+                  eventOperations.DELETE_EVENT_BOOKING &&
+                eventBookingIdToDelete === params.value
+              }
+            >
+              Delete Registration
+            </LoadingButton>
+          );
+        },
+        headerAlign: "center",
+      },
+    ],
+    rows: [],
+  });
 
   const events = useSelector((state) => state.events);
   const dispatch = useDispatch();
@@ -31,6 +122,26 @@ const MyBookings = () => {
     ) {
       setSnackbarOpen(true);
       setSuccessSnackbarOpen(false);
+    } else if (
+      events.apiStatus === apiStatus.SUCCESS &&
+      events.eventOperation === eventOperations.GET_ALL_BOOKINGS
+    ) {
+      setSuccessSnackbarOpen(false);
+      setSnackbarOpen(false);
+      const newRows = events.bookedEvents.map((row) => {
+        return {
+          id: row._id,
+          bookedOn: new Date(Number(row.createdAt)).toUTCString(),
+          eventName: row.eventId.name,
+          eventDate: new Date(Number(row.eventId.date)).toUTCString(),
+          eventLocation: row.eventId.location,
+          viewEvent: row.eventId._id,
+          deleteRegistration: row.eventId._id,
+        };
+      });
+      setFormattedData((prevData) => {
+        return { ...prevData, rows: newRows };
+      });
     } else if (
       events.apiStatus === apiStatus.FAILURE &&
       events.eventOperation === eventOperations.DELETE_EVENT_BOOKING
@@ -57,118 +168,6 @@ const MyBookings = () => {
 
     setSnackbarOpen(false);
   };
-
-  const formattedData = {};
-  formattedData.rows = events.bookedEvents.map((row) => {
-    return {
-      id: row.id,
-      title: row.title,
-      description: row.description,
-      location: row.location,
-      date: row.date,
-      price: row.price,
-    };
-  });
-
-  formattedData.columns = [
-    {
-      field: "id",
-      hide: true,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      editable: false,
-      field: "bookedOn",
-      headerName: "Booked On",
-      width: 250,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      editable: false,
-      field: "eventName",
-      headerName: "Event Name",
-      width: 250,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      editable: false,
-      field: "eventDate",
-      headerName: "Event Date",
-      width: 250,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      editable: false,
-      field: "eventLocation",
-      headerName: "Event Location",
-      width: 250,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      editable: false,
-      field: "viewEvent",
-      headerName: "View Event",
-      width: 250,
-      align: "center",
-      renderCell: (params) => {
-        return <a href={`/browseEvents/${params.value}`}>View Event</a>;
-      },
-      headerAlign: "center",
-    },
-    {
-      editable: false,
-      field: "deleteRegistration",
-      headerName: "Delete Booking",
-      width: 200,
-      align: "center",
-      renderCell: (params) => {
-        return (
-          <LoadingButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            onClick={() => {
-              setEventBookingIdToDelete(params.value);
-              dispatch(eventActions.deleteEventBooking(params.value));
-            }}
-            sx={{
-              mt: 3,
-              mb: 3,
-              backgroundColor: "red",
-              ":hover": {
-                backgroundColor: "red",
-              },
-            }}
-            loading={
-              events.apiStatus === apiStatus.IN_PROGRESS &&
-              events.eventOperation === eventOperations.DELETE_EVENT_BOOKING &&
-              eventBookingIdToDelete === params.value
-            }
-          >
-            Delete Registration
-          </LoadingButton>
-        );
-      },
-      headerAlign: "center",
-    },
-  ];
-
-  formattedData.rows = events.bookedEvents.map((row) => {
-    return {
-      id: row._id,
-      bookedOn: new Date(Number(row.createdAt)).toUTCString(),
-      eventName: row.eventId.name,
-      eventDate: new Date(Number(row.eventId.date)).toUTCString(),
-      eventLocation: row.eventId.location,
-      viewEvent: row.eventId._id,
-      deleteRegistration: row.eventId._id,
-    };
-  });
 
   return (
     <>

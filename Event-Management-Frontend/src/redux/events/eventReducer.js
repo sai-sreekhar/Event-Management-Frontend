@@ -7,6 +7,7 @@ const initialState = {
   eventDetails: {},
   bookedEvents: [],
   myHostedEvents: [],
+  hostedEventRegistrations: {},
   eventOperation: eventOperations.INVALID,
 };
 
@@ -206,6 +207,31 @@ export default function eventReducer(state = initialState, action) {
         ...state,
         apiStatus: apiStatus.FAILURE,
         eventOperation: eventOperations.UPDATE_EVENT,
+        errorReason: action.payload.error,
+      };
+    case eventActions.GET_HOSTED_EVENT_REGISTRATIONS_IN_PROGRESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.IN_PROGRESS,
+        eventOperation: eventOperations.GET_HOSTED_EVENT_REGISTRATIONS,
+        errorReason: null,
+      };
+    case eventActions.GET_HOSTED_EVENT_REGISTRATIONS_SUCCESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.SUCCESS,
+        eventOperation: eventOperations.GET_HOSTED_EVENT_REGISTRATIONS,
+        hostedEventRegistrations: {
+          ...state.hostedEventRegistrations,
+          [action.payload.eventId]: action.payload.eventRegistrations,
+        },
+        errorReason: null,
+      };
+    case eventActions.GET_HOSTED_EVENT_REGISTRATIONS_FAILURE:
+      return {
+        ...state,
+        apiStatus: apiStatus.FAILURE,
+        eventOperation: eventOperations.GET_HOSTED_EVENT_REGISTRATIONS,
         errorReason: action.payload.error,
       };
     default:
