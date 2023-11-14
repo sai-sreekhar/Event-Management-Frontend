@@ -4,7 +4,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { eventActions } from "../redux";
 import { apiStatus, eventOperations } from "../redux/events/eventTypes";
-import { Box, Snackbar } from "@mui/material";
+import { Box, Snackbar, Typography } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import LoadingButton from "@mui/lab/LoadingButton";
 
@@ -190,23 +190,25 @@ const MyBookings = () => {
 
       <Box
         style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           height: "100%",
           width: "100%",
-          backgroundColor: "lightcyan",
           marginTop: "8px",
-          "& .super-app-theme--header": {
-            backgroundColor: "rgba(255, 7, 0, 0.55)",
-          },
         }}
       >
+        <Typography variant="h4" align="center">
+          EVENTS YOU HAVE BOOKED
+        </Typography>
         <DataGrid
           sx={{
+            mt: 2,
             boxShadow: 2,
             border: 2,
             borderColor: "primary.light",
-            "& .MuiDataGrid-cell:hover": {
-              color: "primary.main",
-            },
+            backgroundColor: "lightcyan"
           }}
           {...formattedData}
           loading={
