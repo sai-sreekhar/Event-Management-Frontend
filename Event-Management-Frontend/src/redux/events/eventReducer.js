@@ -100,6 +100,49 @@ export default function eventReducer(state = initialState, action) {
         eventOperation: eventOperations.BUY_TICKET,
         errorReason: action.payload.error,
       };
+    case eventActions.GET_ALL_BOOKINGS_IN_PROGRESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.IN_PROGRESS,
+        eventOperation: eventOperations.GET_ALL_BOOKINGS,
+        errorReason: null,
+      };
+    case eventActions.GET_ALL_BOOKINGS_SUCCESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.SUCCESS,
+        eventOperation: eventOperations.GET_ALL_BOOKINGS,
+        bookedEvents: action.payload.bookedEvents,
+        errorReason: null,
+      };
+    case eventActions.GET_ALL_BOOKINGS_FAILURE:
+      return {
+        ...state,
+        apiStatus: apiStatus.FAILURE,
+        eventOperation: eventOperations.GET_ALL_BOOKINGS,
+        errorReason: action.payload.error,
+      };
+    case eventActions.DELETE_EVENT_BOOKING_IN_PROGRESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.IN_PROGRESS,
+        eventOperation: eventOperations.DELETE_EVENT_BOOKING,
+        errorReason: null,
+      };
+    case eventActions.DELETE_EVENT_BOOKING_SUCCESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.SUCCESS,
+        eventOperation: eventOperations.DELETE_EVENT_BOOKING,
+        errorReason: null,
+      };
+    case eventActions.DELETE_EVENT_BOOKING_FAILURE:
+      return {
+        ...state,
+        apiStatus: apiStatus.FAILURE,
+        eventOperation: eventOperations.DELETE_EVENT_BOOKING,
+        errorReason: action.payload.error,
+      };
     default:
       return state;
   }

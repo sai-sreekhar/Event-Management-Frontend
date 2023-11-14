@@ -11,6 +11,12 @@ export const eventActions = {
   BUY_TICKET_IN_PROGRESS: "@event/buyTicketInProgress",
   BUY_TICKET_SUCCESS: "@event/buyTicketSuccess",
   BUY_TICKET_FAILURE: "@event/buyTicketFailure",
+  GET_ALL_BOOKINGS_IN_PROGRESS: "@event/getAllBookingsInProgress",
+  GET_ALL_BOOKINGS_SUCCESS: "@event/getAllBookingsSuccess",
+  GET_ALL_BOOKINGS_FAILURE: "@event/getAllBookingsFailure",
+  DELETE_EVENT_BOOKING_IN_PROGRESS: "@event/deleteEventBookingInProgress",
+  DELETE_EVENT_BOOKING_SUCCESS: "@event/deleteEventBookingSuccess",
+  DELETE_EVENT_BOOKING_FAILURE: "@event/deleteEventBookingFailure",
 };
 
 export const apiStatus = {
@@ -25,5 +31,7 @@ export const eventOperations = {
   GET_EVENT_DETAILS: "getEventDetails",
   HOST_EVENT: "hostEvent",
   BUY_TICKET: "buyTicket",
+  GET_ALL_BOOKINGS: "getAllBookings",
+  DELETE_EVENT_BOOKING: "deleteEventBooking",
   INVALID: "invalid",
-}
+};

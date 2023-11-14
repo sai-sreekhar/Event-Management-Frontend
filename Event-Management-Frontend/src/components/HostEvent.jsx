@@ -178,7 +178,7 @@ function HostEvent() {
             <DateTimePicker
               label="Select Date"
               slotProps={{ textField: { fullWidth: true } }}
-              defaultValue={dayjs("2022-04-17")}
+              defaultValue={dayjs(Date.now())}
               sx={{
                 mt: 1,
               }}

@@ -123,7 +123,7 @@ function ViewEventDetails() {
           <Grid item xs={12} sm={12} md={12}>
             <CardMedia
               component="img"
-              height="300"
+              height="250"
               image={imgUrl}
               alt="Event Image"
             />
@@ -135,36 +135,37 @@ function ViewEventDetails() {
               alignItems="flex-start"
               flexGrow={1}
             >
-              <Typography variant="h6">
+              <Typography variant="h5">
                 <b>Timing: </b>{" "}
-                {new Date(events.eventDetails[eventId].date * 1000).toString()}
+                {new Date(Number(events.eventDetails[eventId].date)).toUTCString()}
               </Typography>
-              <Typography variant="h6">
+              <Typography variant="h5">
                 <b>Venue: </b>
                 {events.eventDetails[eventId].location}
               </Typography>
-              <Typography variant="h6">
+              <Typography variant="h5">
                 <b>Participants Limit: </b>
                 {events.eventDetails[eventId].limit}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="h6">
                 <b>Description: </b>
                 {events.eventDetails[eventId].description}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="h6">
                 <b>Organizer: </b>
                 {events.eventDetails[eventId].hostName}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="h6">
                 <b>Contact: </b>
                 {events.eventDetails[eventId].hostContact}
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="h6">
                 <b>Email: </b>
                 {events.eventDetails[eventId].hostEmail}
               </Typography>
               <LoadingButton
                 fullWidth
+                type="submit"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={buyTicketHandler}

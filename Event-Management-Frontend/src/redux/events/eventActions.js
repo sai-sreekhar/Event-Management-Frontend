@@ -79,6 +79,45 @@ const buyTicketFailure = (error) => {
   };
 };
 
+const getAllBookingsInProgress = () => {
+  return {
+    type: eventActions.GET_ALL_BOOKINGS_IN_PROGRESS,
+  };
+};
+
+const getAllBookingsSuccess = (bookedEvents) => {
+  return {
+    type: eventActions.GET_ALL_BOOKINGS_SUCCESS,
+    payload: { bookedEvents },
+  };
+};
+
+const getAllBookingsFailure = (error) => {
+  return {
+    type: eventActions.GET_ALL_BOOKINGS_FAILURE,
+    payload: { error },
+  };
+};
+
+const deleteEventBookingInProgress = () => {
+  return {
+    type: eventActions.DELETE_EVENT_BOOKING_IN_PROGRESS,
+  };
+};
+
+const deleteEventBookingSuccess = () => {
+  return {
+    type: eventActions.DELETE_EVENT_BOOKING_SUCCESS,
+  };
+};
+
+const deleteEventBookingFailure = (error) => {
+  return {
+    type: eventActions.DELETE_EVENT_BOOKING_FAILURE,
+    payload: { error },
+  };
+};
+
 const getAllEvents = () => {
   return async (dispatch) => {
     dispatch(getAllEventsInProgress());
@@ -169,4 +208,53 @@ const buyTicket = (eventId) => {
     }
   };
 };
-export { getAllEvents, getEventDetails, hostEvent, buyTicket };
+
+const getAllBookings = () => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(getAllBookingsInProgress());
+    try {
+      const response = await fetch(`${API_V1_BASE_URL}/registrations`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(getAllBookingsSuccess(data.data.registeredEvents));
+      } else {
+        dispatch(getAllBookingsFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(getAllBookingsFailure(error.message));
+    }
+  };
+};
+
+const deleteEventBooking = (eventId) => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(deleteEventBookingInProgress());
+    try {
+      const response = await fetch(
+        `${API_V1_BASE_URL}/registrations/${eventId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(deleteEventBookingSuccess());
+      } else {
+        dispatch(deleteEventBookingFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(deleteEventBookingFailure(error.message));
+    }
+  };
+};
+
+export { getAllEvents, getEventDetails, hostEvent, buyTicket, getAllBookings, deleteEventBooking};
