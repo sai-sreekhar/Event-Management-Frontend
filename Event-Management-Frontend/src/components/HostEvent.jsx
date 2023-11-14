@@ -29,6 +29,7 @@ function HostEvent() {
   const [uploadFailureError, setUploadFailureError] = useState("");
   const [fileName, setFileName] = useState("");
   const [generatedEventId, setGeneratedEventId] = useState("");
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -56,6 +57,12 @@ function HostEvent() {
       setDateTimeError(true);
       return;
     }
+    if (!uploadSuccess) {
+      setUploadFailedSnackbarOpen(true);
+      setUploadFailureError("Please upload an image");
+      return;
+    }
+
     const data = new FormData(event.currentTarget);
     const eventDetails = {
       name: data.get("title"),
