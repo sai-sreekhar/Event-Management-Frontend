@@ -30,6 +30,7 @@ function App() {
     "profile",
     "myEvents",
     "myBookings",
+    "updateEvent"
   ];
 
   useEffect(() => {

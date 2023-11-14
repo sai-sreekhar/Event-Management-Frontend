@@ -171,7 +171,7 @@ const MyEvents = () => {
                       ":hover": { backgroundColor: "green" },
                     }}
                     onClick={() => {
-                      navigate(`/browseEvents/${event._id}`);
+                      navigate(`/updateEvent/${event._id}`);
                     }}
                   >
                     <Typography variant="body2" color="white">

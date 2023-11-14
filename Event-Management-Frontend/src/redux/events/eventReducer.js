@@ -187,6 +187,27 @@ export default function eventReducer(state = initialState, action) {
         eventOperation: eventOperations.DELETE_MY_HOSTED_EVENT,
         errorReason: action.payload.error,
       };
+    case eventActions.UPDATE_EVENT_IN_PROGRESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.IN_PROGRESS,
+        eventOperation: eventOperations.UPDATE_EVENT,
+        errorReason: null,
+      };
+    case eventActions.UPDATE_EVENT_SUCCESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.SUCCESS,
+        eventOperation: eventOperations.UPDATE_EVENT,
+        errorReason: null,
+      };
+    case eventActions.UPDATE_EVENT_FAILURE:
+      return {
+        ...state,
+        apiStatus: apiStatus.FAILURE,
+        eventOperation: eventOperations.UPDATE_EVENT,
+        errorReason: action.payload.error,
+      };
     default:
       return state;
   }

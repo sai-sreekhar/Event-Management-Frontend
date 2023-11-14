@@ -157,6 +157,25 @@ const getMyHostedEventsFailure = (error) => {
   };
 };
 
+const updateEventInProgress = () => {
+  return {
+    type: eventActions.UPDATE_EVENT_IN_PROGRESS,
+  };
+};
+
+const updateEventSuccess = () => {
+  return {
+    type: eventActions.UPDATE_EVENT_SUCCESS,
+  };
+};
+
+const updateEventFailure = (error) => {
+  return {
+    type: eventActions.UPDATE_EVENT_FAILURE,
+    payload: { error },
+  };
+};
+
 const getAllEvents = () => {
   return async (dispatch) => {
     dispatch(getAllEventsInProgress());
@@ -340,6 +359,31 @@ const deleteMyHostedEvent = (eventId) => {
   };
 };
 
+const updateEvent = (eventId, eventDetails) => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(updateEventInProgress());
+    try {
+      const response = await fetch(`${API_V1_BASE_URL}/myEvents/${eventId}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventDetails),
+      });
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(updateEventSuccess());
+      } else {
+        dispatch(updateEventFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(updateEventFailure(error.message));
+    }
+  };
+};
+
 export {
   getAllEvents,
   getEventDetails,
@@ -349,4 +393,5 @@ export {
   deleteEventBooking,
   getMyHostedEvents,
   deleteMyHostedEvent,
+  updateEvent,
 };

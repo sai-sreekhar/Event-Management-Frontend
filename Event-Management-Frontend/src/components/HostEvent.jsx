@@ -10,6 +10,7 @@ import { eventActions } from "../redux";
 import React, { useEffect, useState } from "react";
 import { apiStatus, eventOperations } from "../redux/events/eventTypes";
 import MuiAlert from "@mui/material/Alert";
+import { useNavigate } from "react-router";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -19,6 +20,7 @@ function HostEvent() {
   const auth = useSelector((state) => state.auth);
   const [dateTime, setDateTime] = useState(0);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events);
@@ -29,7 +31,11 @@ function HostEvent() {
       events.eventOperation === eventOperations.HOST_EVENT
     ) {
       setSnackbarOpen(true);
-    } else {
+    } else if (
+      events.apiStatus === apiStatus.SUCCESS &&
+      events.eventOperation === eventOperations.HOST_EVENT
+    ) {
+      navigate("/myEvents");
       setSnackbarOpen(false);
     }
   }, [events.apiStatus, events.eventOperation]);

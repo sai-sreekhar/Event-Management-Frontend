@@ -23,6 +23,9 @@ export const eventActions = {
   DELETE_MY_HOSTED_EVENT_IN_PROGRESS: "@event/deleteMyHostedEventInProgress",
   DELETE_MY_HOSTED_EVENT_SUCCESS: "@event/deleteMyHostedEventSuccess",
   DELETE_MY_HOSTED_EVENT_FAILURE: "@event/deleteMyHostedEventFailure",
+  UPDATE_EVENT_IN_PROGRESS: "@event/updateEventInProgress",
+  UPDATE_EVENT_SUCCESS: "@event/updateEventSuccess",
+  UPDATE_EVENT_FAILURE: "@event/updateEventFailure",
 };
 
 export const apiStatus = {
@@ -41,5 +44,6 @@ export const eventOperations = {
   DELETE_EVENT_BOOKING: "deleteEventBooking",
   GET_MY_HOSTED_EVENTS: "getMyHostedEvents",
   DELETE_MY_HOSTED_EVENT: "deleteMyHostedEvent",
+  UPDATE_EVENT: "updateEvent",
   INVALID: "invalid",
 };
