@@ -14,7 +14,6 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { eventActions } from "../redux";
-import imgUrl from "../assets/images/virat.jpg";
 import { apiStatus, eventOperations } from "../redux/events/eventTypes";
 import * as React from "react";
 import MuiAlert from "@mui/material/Alert";
@@ -64,7 +63,7 @@ function GetAllEvents() {
 
     setSnackbarOpen(false);
   };
-
+  console.log(events)
   return (
     <>
       <Backdrop
@@ -97,7 +96,7 @@ function GetAllEvents() {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={imgUrl}
+                    image={event.image}
                     alt="Event Image"
                   />
                   <CardContent>

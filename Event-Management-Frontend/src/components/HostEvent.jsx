@@ -11,6 +11,8 @@ import React, { useEffect, useState } from "react";
 import { apiStatus, eventOperations } from "../redux/events/eventTypes";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router";
+import UploadModalButton from "./UploadModalButton";
+import { AWS_S3_EVENTS_BASE_URL } from "../constants";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -20,7 +22,13 @@ function HostEvent() {
   const auth = useSelector((state) => state.auth);
   const [dateTime, setDateTime] = useState(0);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [dataTimeError, setDateTimeError] = useState(false); // eslint-disable-line no-unused-vars
+  const [dataTimeError, setDateTimeError] = useState(false);
+  const [uploadFailedSnackbarOpen, setUploadFailedSnackbarOpen] =
+    useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [uploadFailureError, setUploadFailureError] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [generatedEventId, setGeneratedEventId] = useState("");
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -55,7 +63,7 @@ function HostEvent() {
       limit: data.get("limit"),
       description: data.get("description"),
       date: dateTime,
-      image: "https://picsum.photos/200/300",
+      image: `${AWS_S3_EVENTS_BASE_URL}/${generatedEventId}/${fileName}`,
       price: 1000,
     };
     dispatch(eventActions.hostEvent(eventDetails));
@@ -67,10 +75,23 @@ function HostEvent() {
     }
 
     setSnackbarOpen(false);
+    setDateTimeError(false);
+    setUploadFailedSnackbarOpen(false);
   };
 
   const handleDateTimeChange = (newValue) => {
     setDateTime(newValue.$d.getTime());
+  };
+
+  const onUploadSuccess = (fileName, eventId) => {
+    setFileName(fileName);
+    setGeneratedEventId(eventId);
+    setUploadSuccess(true);
+  };
+
+  const onUploadFailure = (error) => {
+    setUploadFailureError(error);
+    setUploadFailedSnackbarOpen(true);
   };
 
   return (
@@ -92,6 +113,16 @@ function HostEvent() {
       >
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           {"Date and Time cannot be in the past"}
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={uploadFailedSnackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {uploadFailureError}
         </Alert>
       </Snackbar>
 
@@ -215,6 +246,10 @@ function HostEvent() {
             name="description"
             autoComplete="description"
           />
+          <UploadModalButton
+            onUploadSuccess={onUploadSuccess}
+            onUploadFailure={onUploadFailure}
+          ></UploadModalButton>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
           <LoadingButton

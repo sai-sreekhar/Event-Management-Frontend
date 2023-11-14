@@ -15,7 +15,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router";
-import imgUrl from "../assets/images/virat.jpg";
 import React, { useEffect, useState } from "react";
 import { eventActions } from "../redux";
 import MuiAlert from "@mui/material/Alert";
@@ -134,7 +133,7 @@ const MyEvents = () => {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={imgUrl}
+                    image={event.image}
                     alt="Event Image"
                   />
                   <CardContent>

@@ -11,7 +11,6 @@ import {
   Snackbar,
   Typography,
 } from "@mui/material";
-import imgUrl from "../assets/images/virat.jpg";
 import { apiStatus, eventOperations } from "../redux/events/eventTypes";
 import MuiAlert from "@mui/material/Alert";
 import withAuth from "./withAuth";
@@ -124,7 +123,7 @@ function ViewEventDetails() {
             <CardMedia
               component="img"
               height="250"
-              image={imgUrl}
+              image={events.eventDetails[eventId].image}
               alt="Event Image"
             />
           </Grid>
@@ -137,7 +136,9 @@ function ViewEventDetails() {
             >
               <Typography variant="h5">
                 <b>Timing: </b>{" "}
-                {new Date(Number(events.eventDetails[eventId].date)).toUTCString()}
+                {new Date(
+                  Number(events.eventDetails[eventId].date)
+                ).toUTCString()}
               </Typography>
               <Typography variant="h5">
                 <b>Venue: </b>
