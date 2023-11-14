@@ -83,7 +83,13 @@ function GetAllEvents() {
         </Alert>
       </Snackbar>
 
-      <Grid item xs={12} sm={6} md={9} mt={1}>
+      <Grid item xs={12} sm={6} md={9} sx={{
+        backgroundColor: "lightblue",
+        pt: 2,
+        pb: 2,
+        mt: 2,
+        mb: 2,
+      }}>
         <Grid container spacing={2} pl={2} pr={2}>
           {events.events.map((event) => (
             <Grid item xs={12} sm={6} md={3} key={event._id}>

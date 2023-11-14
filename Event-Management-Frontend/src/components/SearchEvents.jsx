@@ -20,19 +20,21 @@ function SearchEvents() {
       xs={12}
       sm={6}
       md={3}
-      mt={1}
       sx={{
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
         backgroundColor: "lightcyan",
+        pt: 2,
+        pb: 2,
+        mt: 2,
+        mb: 2,
       }}
     >
       <div
         style={{
           position: "sticky",
-          height: "100px",
           width: "100%",
           top: "0px",
         }}
