@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import withAuth from "./withAuth";
-import { Grid, Snackbar, TextField, Typography } from "@mui/material";
+import { Button, Grid, Snackbar, TextField, Typography } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
@@ -246,10 +246,16 @@ function HostEvent() {
             name="description"
             autoComplete="description"
           />
-          <UploadModalButton
-            onUploadSuccess={onUploadSuccess}
-            onUploadFailure={onUploadFailure}
-          ></UploadModalButton>
+          {uploadSuccess ? (
+            <Button fullWidth variant="contained" disabled>
+              Image Uploaded Successfully
+            </Button>
+          ) : (
+            <UploadModalButton
+              onUploadSuccess={onUploadSuccess}
+              onUploadFailure={onUploadFailure}
+            ></UploadModalButton>
+          )}
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
           <LoadingButton
