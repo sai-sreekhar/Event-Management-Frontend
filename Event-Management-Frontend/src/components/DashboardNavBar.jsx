@@ -13,9 +13,10 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux";
 import { toCamelCase } from "../utils/toCamelCase";
+import { deepOrange } from "@mui/material/colors";
 
 const pages = ["Host Event", "Browse Events"];
 const settings = ["Profile", "My Events", "My Bookings", "Logout"];
@@ -25,6 +26,7 @@ function DashboardNavBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   const adbIconDesktopView = React.useMemo(() => {
     return { display: { xs: "none", md: "flex" }, mr: 1 };
@@ -187,7 +189,9 @@ function DashboardNavBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Profile Image" sx={{ bgcolor: deepOrange[500] }}>
+                  {auth.userData ? auth.userData.name[0] : "U"}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
