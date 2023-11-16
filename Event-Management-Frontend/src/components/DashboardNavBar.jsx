@@ -25,7 +25,7 @@ function DashboardNavBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const adbIconDesktopView = React.useMemo(() => {
     return { display: { xs: "none", md: "flex" }, mr: 1 };
   }, []);
@@ -61,7 +61,7 @@ function DashboardNavBar() {
       navigate("/");
     } else {
       navigate(`/${toCamelCase(setting)}`);
-    } 
+    }
   };
 
   const navMenuOnClickHandler = (event) => {

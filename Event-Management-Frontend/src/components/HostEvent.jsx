@@ -29,7 +29,6 @@ function HostEvent() {
   const [uploadFailureError, setUploadFailureError] = useState("");
   const [fileName, setFileName] = useState("");
   const [generatedEventId, setGeneratedEventId] = useState("");
-  const [isImageUploaded, setIsImageUploaded] = useState(false);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -64,6 +63,7 @@ function HostEvent() {
     }
 
     const data = new FormData(event.currentTarget);
+    console.log(generatedEventId);
     const eventDetails = {
       name: data.get("title"),
       location: data.get("location"),

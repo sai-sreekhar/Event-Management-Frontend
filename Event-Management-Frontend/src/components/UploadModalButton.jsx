@@ -15,6 +15,7 @@ class UploadModalButton extends Component {
 
     this.state = {
       modalOpen: false,
+      generatedEventId: "",
     };
 
     // Create & configure Uppy instance
@@ -32,7 +33,7 @@ class UploadModalButton extends Component {
     // Tell it to use their AWS S3 plugin
     // Will get pre-signed URL from server API
     this.uppy.use(AwsS3, {
-      async getUploadParameters(file) {
+      getUploadParameters: async(file) => {
         console.log("file: ", file);
 
         try {
@@ -41,6 +42,10 @@ class UploadModalButton extends Component {
             type: 1,
             eventId: uuidv4(),
           };
+
+          this.setState({
+            generatedEventId: body.eventId,
+          });
 
           const response = await fetch(
             `${API_V1_BASE_URL}/aws/s3/signUrl/put/${file.name}`,
@@ -56,7 +61,6 @@ class UploadModalButton extends Component {
           const data = await response.json();
           // Return an object in the correct shape.
           if (data.status === "success") {
-            props.onUploadSuccess(file.name, body.eventId);
             return {
               url: data.data.preSignedUrl,
               method: "PUT",
@@ -72,6 +76,14 @@ class UploadModalButton extends Component {
           props.onUploadFailure(error.message);
         }
       },
+    });
+
+    this.uppy.on("upload-success", (file, response) => {
+      props.onUploadSuccess(file.name, this.state.generatedEventId);
+    });
+
+    this.uppy.on("upload-error", (file, error, response) => {
+      props.onUploadFailure(error.message);
     });
   }
 
