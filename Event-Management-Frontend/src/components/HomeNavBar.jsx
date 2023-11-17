@@ -1,166 +1,73 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import { useNavigate } from "react-router";
-import { toCamelCase } from "../utils/toCamelCase";
-
-const pages = ["Home", "Services", "Testinomials", "Contact", "Dashboard"];
-
-function HomeNavBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const navigate = useNavigate();
-  const adbIconDesktopView = React.useMemo(() => {
-    return { display: { xs: "none", md: "flex" }, mr: 1 };
-  }, []);
-  const adbIconMobileView = React.useMemo(() => {
-    return { display: { xs: "flex", md: "none" }, mr: 1 };
-  }, []);
-
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const navMenuOnClickHandler = (event) => {
-    handleCloseNavMenu();
-
-    const pageIndex = pages.findIndex(
-      (page) => event.target.textContent === page
-    );
-
-    if (pageIndex !== -1) {
-      if (pageIndex === 0) {
-        navigate(`/`);
-      } else {
-        navigate(`/${toCamelCase(pages[pageIndex])}`);
-      }
-    } else {
-      console.log("Invalid page index");
-    }
-  };
-
+import logo from "./../assets/images/Group91.png";
+import "./../styles/HomeNavBar.css";
+import "./../styles/Bootstrap.css";
+import { Link } from "react-router-dom";
+const HomeNavBar = () => {
   return (
-    <AppBar position="fixed">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* // This is the logo for the desktop view */}
-          <AdbIcon sx={adbIconDesktopView} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Event Whiz
-          </Typography>
-
-          {/* This is the hamburger menu for the mobile view */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-              justifyContent: "flex-end",
-            }}
-          >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={navMenuOnClickHandler}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          {/*This is the logo for the mobile view */}
-          <AdbIcon sx={adbIconMobileView} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Event Whiz
-          </Typography>
-          {/* // This is the navigation menu for the desktop view */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "flex-end",
-            }}
-          >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={navMenuOnClickHandler}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <div>
+      <div className="container-navbar mt-3">
+        <div className="row">
+          <div className="col-3 text-end">
+            <img src={logo} alt="Logo" width={"290px"} height={"71px"} />
+          </div>
+          <div className="offset-2 col-3 navbar navbar-expand-lg">
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link to={"/"} className="nav-link text-white pe-3">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/services"} className="nav-link text-white pe-3">
+                    Service
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to={"/testimonials"}
+                    className="nav-link text-white pe-3"
+                  >
+                    Testimonials
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/contact"} className="nav-link text-white pe-3">
+                    ContactUs
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="offset-2 col-2 navbar navbar-expand-lg">
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link to={"/dashboard"} className="text-white ">
+                    <button className="button ms-3">
+                      Dashboard
+                      <svg
+                        className="icon"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                    </button>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="HorizontalLine"></div>
+    </div>
   );
-}
+};
+
 export default HomeNavBar;

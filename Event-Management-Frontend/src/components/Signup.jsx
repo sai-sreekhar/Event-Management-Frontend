@@ -1,13 +1,6 @@
-import Avatar from "@mui/material/Avatar";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux";
 import { useEffect, useState } from "react";
@@ -17,8 +10,11 @@ import { Snackbar } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import MuiAlert from "@mui/material/Alert";
 import * as React from "react";
-
-const defaultTheme = createTheme();
+import "./../styles/Bootstrap.css";
+import "./../styles/Signup.css";
+import Logo from "./../assets/images/Group91.png";
+import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -27,6 +23,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function SignUp() {
   const [emailError, setEmailError] = useState("");
   const [contactError, setContactError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -56,6 +53,7 @@ export default function SignUp() {
     const email = data.get("email");
     const contact = data.get("contact");
     const password = data.get("password");
+    const confirmPassword = data.get("confirmPassword");
 
     // console.log({
     //   name: data.get("name"),
@@ -79,6 +77,14 @@ export default function SignUp() {
       error = true;
     } else {
       setContactError(""); // Clear the contact error if it's valid
+    }
+
+    // Validate the re-entered password
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+      error = true;
+    } else {
+      setPasswordError(""); // Clear the password error if it's valid
     }
 
     // Only dispatch the signup action if both email and contact are valid
@@ -109,100 +115,153 @@ export default function SignUp() {
           {auth.errorReason}
         </Alert>
       </Snackbar>
-      <ThemeProvider theme={defaultTheme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    autoComplete="name"
-                    name="name"
-                    required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="contact"
-                    label="Contact Number"
-                    name="contact"
-                    autoComplete="contact"
-                    error={!!contactError}
-                    helperText={contactError}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    error={!!emailError}
-                    helperText={emailError}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                  />
-                </Grid>
-              </Grid>
-              <LoadingButton
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                loading={
-                  auth.apiStatus === apiStatus.IN_PROGRESS &&
-                  auth.authOperation === authOperation.SIGNUP &&
-                  auth.authStatus === authStatus.NOT_LOGGED_IN
-                }
+
+      <div className="SingUpWholeBody container-fluid">
+        <div className="row">
+          <div className="col-6 ImageLogin">
+            <div className="EventWhizlogo">
+              <Link to={"/"} className="">
+                <img src={Logo} alt="" />
+              </Link>
+            </div>
+            <div className="LoginText">
+              To Continue,
+              <br />
+              Sign Up to EventWhiz.
+            </div>
+          </div>
+          <div className="col-6 SideImage">
+            <div className="row pageCenter">
+              <div
+                className="col-12 text-center pb-5"
+                style={{ fontWeight: "600", fontSize: "3.3rem" }}
               >
-                Sign Up
-              </LoadingButton>
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link href="/login" variant="body2">
-                    Already have an account? Login
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-        </Container>
-      </ThemeProvider>
+                <FaUser />
+                <span className="ps-3">Signup</span>
+              </div>
+              <div className="offset-3 col-9">
+                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <TextField
+                        autoComplete="name"
+                        name="name"
+                        required
+                        fullWidth
+                        id="name"
+                        label="Name"
+                        autoFocus
+                        sx={{ width: "70%" }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        id="contact"
+                        label="Contact Number"
+                        name="contact"
+                        autoComplete="contact"
+                        error={!!contactError}
+                        helperText={contactError}
+                        sx={{ width: "70%" }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        error={!!emailError}
+                        helperText={emailError}
+                        sx={{ width: "70%" }}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="new-password"
+                        sx={{ width: "70%" }}
+                        error={!!passwordError}
+                        helperText={passwordError}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        name="confirmPassword"
+                        label="Confirm Password"
+                        type="password"
+                        id="confirmPassword"
+                        autoComplete="new-password"
+                        sx={{ width: "70%" }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <LoadingButton
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{
+                      mt: 3,
+                      mb: 2,
+                      color: "white",
+                      textDecoration: "none",
+                      border: "2px solid black",
+                      padding: "8px 20px",
+                      fontSize: "18px",
+                      background: "transparent",
+                      position: "relative",
+                      transition: "all 0.5s",
+                      overflow: "hidden",
+                      backgroundColor: "#274A8D",
+                      borderRadius: "5px",
+                      fontFamily: "Oswald",
+                      width: "40%",
+                      marginLeft: "15%",
+                      "&:hover": {
+                        textDecoration: "none",
+                        border: "2px solid black",
+                        padding: "8px 20px",
+                        fontSize: "18px",
+                        background: "transparent",
+                        position: "relative",
+                        transition: "all 0.5s",
+                        overflow: "hidden",
+                        backgroundColor: "#274A8D",
+                        borderRadius: "5px",
+                        fontFamily: "Oswald",
+                        color: "black",
+                      },
+                    }}
+                    loading={
+                      auth.apiStatus === apiStatus.IN_PROGRESS &&
+                      auth.authOperation === authOperation.SIGNUP &&
+                      auth.authStatus === authStatus.NOT_LOGGED_IN
+                    }
+                  >
+                    Sign Up
+                  </LoadingButton>
+                  <Grid container justifyContent="center">
+                    <Grid item>
+                      <Link href="/login">Already have an account? Login</Link>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

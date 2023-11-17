@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import withAuth from "./withAuth";
+import { Typography } from "@mui/material";
 
 function Dashboard() {
   const auth = useSelector((state) => state.auth);
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <h2>Welcome {auth.userData.name}</h2>
-    </div>
+    <Typography variant="h1" component="div" sx={{ flexGrow: 1, color: "red" }}>
+      Welcome {auth.userData.name}
+    </Typography>
   );
 }
 

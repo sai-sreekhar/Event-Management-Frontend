@@ -141,7 +141,11 @@ function HostEvent() {
           display: "flex",
           mt: 2,
           p: 2,
-          backgroundColor: "lightblue",
+          backgroundColor: "#40fff9",
+          backgroundSize: "1490px 790px",
+          backgroundRepeat: "no-repeat",
+          backgroundBlendMode: "luminosity",
+          width: "60%",
         }}
       >
         <Grid

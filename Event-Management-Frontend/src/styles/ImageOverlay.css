@@ -1,0 +1,32 @@
+/* ImageOverlay.css */
+.container1 {
+  position: relative;
+  width: 400px; /* Set the desired width for the container1 */
+  overflow: hidden;
+}
+
+.image {
+  border-radius: 10px;
+  width: 100%;
+  height: 16rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 1; /* Initially transparent */
+  transition: opacity 0.3s ease-in-out;
+}
+.container1:hover .image {
+  transform: scale(1.2); /* Zoom in on hover */
+}
