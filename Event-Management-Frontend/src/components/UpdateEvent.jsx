@@ -99,7 +99,6 @@ function UpdateEvent() {
       limit: data.get("limit"),
       description: data.get("description"),
       date: dateTime,
-      image: "https://picsum.photos/200/300",
       price: 1000,
     };
     dispatch(eventActions.updateEvent(eventId, eventDetails));
