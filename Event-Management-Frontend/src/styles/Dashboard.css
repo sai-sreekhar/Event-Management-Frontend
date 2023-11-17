@@ -505,7 +505,7 @@ nav {
 
 
 .stepsbox{
-  background-image: url('white_concert.png');
+  background-image: url('./../assets/images/white_concert.png');
   height: 690px;
   margin-bottom: 100px;
 }
