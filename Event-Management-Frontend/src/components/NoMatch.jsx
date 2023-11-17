@@ -2,7 +2,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router";
 
-function NoMatch() { 
+function NoMatch() {
   const navigate = useNavigate();
 
   const routeToHome = () => {

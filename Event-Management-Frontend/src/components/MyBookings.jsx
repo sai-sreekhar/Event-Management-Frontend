@@ -59,7 +59,7 @@ const MyBookings = () => {
       {
         editable: false,
         field: "viewEvent",
-        headerName: "View Event",
+        headerName: "Event Info",
         width: 250,
         align: "center",
         renderCell: (params) => {
@@ -67,6 +67,7 @@ const MyBookings = () => {
         },
         headerAlign: "center",
       },
+
       {
         editable: false,
         field: "deleteRegistration",
@@ -196,13 +197,13 @@ const MyBookings = () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          height: "100%",
+          height: "120vh",
           width: "100%",
           marginTop: "8px",
         }}
       >
-        <Typography variant="h4" align="center">
-          EVENTS YOU HAVE BOOKED
+        <Typography variant="h5" align="center" color="#d0d0d0">
+          REGISTERED EVENTS
         </Typography>
         <DataGrid
           sx={{
@@ -210,7 +211,7 @@ const MyBookings = () => {
             boxShadow: 2,
             border: 2,
             borderColor: "primary.light",
-            backgroundColor: "lightcyan",
+            backgroundColor: "#ADD8E6",
           }}
           {...formattedData}
           loading={

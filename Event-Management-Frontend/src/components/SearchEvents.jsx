@@ -10,6 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import celebration from "./../assets/images/Celebration-unscreen.gif";
 
 const defaultTheme = createTheme();
 
@@ -25,8 +26,7 @@ function SearchEvents() {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        backgroundColor: "lightcyan",
-        pt: 2,
+        backgroundColor: "#ADD8E6",
         pb: 2,
         mt: 2,
         mb: 2,
@@ -37,6 +37,7 @@ function SearchEvents() {
           position: "sticky",
           width: "100%",
           top: "0px",
+          color: "white",
         }}
       >
         <ThemeProvider theme={defaultTheme}>
@@ -46,6 +47,7 @@ function SearchEvents() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                color: "white",
               }}
             >
               <TextField
@@ -64,6 +66,16 @@ function SearchEvents() {
                 />
               </LocalizationProvider>
             </Box>
+            <img
+              className="gif2"
+              style={{
+                width: "400px",
+                height: "300px",
+                marginTop: "200px",
+                marginLeft: "-60px",
+              }}
+              src={celebration}
+            ></img>
           </Container>
         </ThemeProvider>
       </div>

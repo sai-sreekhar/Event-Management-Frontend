@@ -9,6 +9,6 @@ const Profile = () => {
       <h2>Welcome {auth.userData.name}</h2>
     </div>
   );
-}
+};
 
 export default withAuth(Profile);

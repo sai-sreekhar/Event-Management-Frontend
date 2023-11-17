@@ -114,11 +114,11 @@ const MyEvents = () => {
           alignItems: "center",
           height: "100%",
           width: "100%",
-          marginTop: "8px",
+          marginTop: "-250px",
         }}
       >
-        <Typography variant="h4" align="center">
-          My Hosted Events
+        <Typography variant="h4" align="center" marginBottom="30px">
+          MY HOSTED EVENTS
         </Typography>
 
         <Grid container spacing={2} pl={2} pr={2}>

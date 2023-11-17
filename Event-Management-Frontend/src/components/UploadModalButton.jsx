@@ -33,7 +33,7 @@ class UploadModalButton extends Component {
     // Tell it to use their AWS S3 plugin
     // Will get pre-signed URL from server API
     this.uppy.use(AwsS3, {
-      getUploadParameters: async(file) => {
+      getUploadParameters: async (file) => {
         console.log("file: ", file);
 
         try {

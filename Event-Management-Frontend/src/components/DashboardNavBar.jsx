@@ -1,228 +1,79 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import { useNavigate } from "react-router";
+import Group from "./../assets/images/Group 1.png"; // Replace with the correct path
+import c5 from "./../assets/images/c5.jpg"; // Replace with the correct path
+import "./../styles/Dashboard.css";
+import logout from "./../assets/images/logout.png";
+import down from "./../assets/images/down.png";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux";
-import { toCamelCase } from "../utils/toCamelCase";
+import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
 
-const pages = ["Host Event", "Browse Events"];
-const settings = ["Profile", "My Events", "My Bookings", "Logout"];
-
-function DashboardNavBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const navigate = useNavigate();
+const DashboardNavBar = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-
-  const adbIconDesktopView = React.useMemo(() => {
-    return { display: { xs: "none", md: "flex" }, mr: 1 };
-  }, []);
-  const adbIconMobileView = React.useMemo(() => {
-    return { display: { xs: "flex", md: "none" }, mr: 1 };
-  }, []);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  const userMenuOnClickHandler = (setting) => () => {
-    handleCloseUserMenu();
-    if (!setting) {
-      console.log("Invalid setting");
-      return;
-    }
-
-    if (setting === "Logout") {
-      dispatch(authActions.logout());
-      navigate("/");
-    } else {
-      navigate(`/${toCamelCase(setting)}`);
-    }
-  };
-
-  const navMenuOnClickHandler = (event) => {
-    handleCloseNavMenu();
-    const pageIndex = pages.findIndex(
-      (page) => event.target.textContent === page
-    );
-
-    if (pageIndex !== -1) {
-      navigate(`/${toCamelCase(pages[pageIndex])}`);
-    } else {
-      console.log("Invalid page index");
-    }
+  const handleDropdownClick = (e) => {
+    e.currentTarget.querySelector(".dropdown-menu").classList.toggle("d-none");
   };
 
   return (
-    <AppBar position="sticky">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* // This is the logo for the desktop view */}
-          <AdbIcon sx={adbIconDesktopView} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Event Whiz
-          </Typography>
+    <div className="nav-side-box">
+      <nav>
+        <Link to={"/dashboard"} className="">
+          <img className="logo pt-3" src={Group} alt="logo" />
+        </Link>
 
-          {/* This is the hamburger menu for the mobile view */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-              justifyContent: "flex-end",
-            }}
-          >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={navMenuOnClickHandler}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          {/*This is the logo for the mobile view */}
-          <AdbIcon sx={adbIconMobileView} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Event Whiz
-          </Typography>
-          {/* // This is the navigation menu for the desktop view */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "flex-end",
-            }}
-          >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={navMenuOnClickHandler}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Profile Image" sx={{ bgcolor: deepOrange[500] }}>
-                  {auth.userData ? auth.userData.name[0] : "U"}
-                </Avatar>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={userMenuOnClickHandler(setting)}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+        <Link to={"/hostEvent"} className="">
+          <button className="button1"></button>
+        </Link>
+        <Link to={"/browseEvents"} className="">
+          <button className="button2"></button>
+        </Link>
+        {/* <Avatar alt="Profile Image" sx={{ bgcolor: deepOrange[500] }}>
+          {auth.userData ? auth.userData.name[0] : "U"}
+        </Avatar> */}
+        <div className="profile-dropdown" onClick={handleDropdownClick}>
+          <img
+            className="profile-picture rounded-circle"
+            src={c5}
+            alt="profile"
+          />
+          <div className="profile-name-email">
+            <span className="profile-name text-white">
+              {auth.userData.name}
+            </span>
+            <span className="profile-email text-white">
+              {auth.userData.email}
+            </span>
+            <span className="profile-img">
+              <img src={down}></img>
+            </span>
+          </div>
+          <div className="dropdown-menu">
+            <Link to={"/profile"}>
+              <p className="dropdown-item">Profile</p>
+            </Link>
+            <Link to={"/myEvents"}>
+              <p className="dropdown-item">My Eventz</p>
+            </Link>
+            <Link to={"/myBookings"}>
+              <p className="dropdown-item">My Bookings</p>
+            </Link>
+            <Link to={"/"}>
+              <img
+                id="img-lg"
+                src={logout}
+                alt="logout"
+                onClick={() => {
+                  dispatch(authActions.logout());
+                }}
+              />
+            </Link>
+          </div>
+        </div>
+      </nav>
+    </div>
   );
-}
+};
+
 export default DashboardNavBar;

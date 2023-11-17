@@ -133,156 +133,169 @@ function HostEvent() {
         </Alert>
       </Snackbar>
 
-      <Grid
-        container
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          display: "flex",
-          mt: 2,
-          p: 2,
-          backgroundColor: "#40fff9",
-          backgroundSize: "1490px 790px",
-          backgroundRepeat: "no-repeat",
-          backgroundBlendMode: "luminosity",
-          width: "60%",
-        }}
-      >
+      <div className="con-hostpage">
+        <div className="heading5 text-white">
+          HOST
+          <div className="heading5-1">EVENTS</div>
+        </div>
+        <div>
+          <img
+            className="gif1"
+            src="https://images.lemonly.com/wp-content/uploads/2018/08/07150313/Homebase_Thumb_v01.gif"
+          ></img>
+        </div>
         <Grid
-          item
+          container
+          component="form"
+          onSubmit={handleSubmit}
           sx={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
+            mt: 2,
+            p: 2,
+            backgroundImage: "linear-gradient(45deg,#2063ac,#4598EC,#DFCA9F)",
+            width: "50%",
+            borderRadius: "10px",
+            marginLeft: "170px",
+            marginTop: "150px",
           }}
-          xs={12}
-          sm={12}
-          md={6}
-          mt={2}
-          p={2}
         >
-          <Typography variant="h3" color="black">
-            Host Details
-          </Typography>
-          <TextField
-            margin="normal"
-            fullWidth
-            disabled
-            id="name"
-            label="Name"
-            name="name"
-            autoComplete="Name"
-            defaultValue={auth.userData.name}
-          />
-          <TextField
-            margin="normal"
-            disabled
-            fullWidth
-            name="email"
-            label="email"
-            id="email"
-            autoComplete="email"
-            defaultValue={auth.userData.email}
-          />
-          <TextField
-            margin="normal"
-            disabled
-            fullWidth
-            id="contact"
-            label="contact"
-            name="contact"
-            autoComplete="contact"
-            defaultValue={auth.userData.contact}
-          ></TextField>
-        </Grid>
-        <Grid
-          item
-          sx={{ display: "flex", flexDirection: "column" }}
-          xs={12}
-          sm={12}
-          md={6}
-          p={2}
-        >
-          <Typography variant="h3" color="black">
-            Event Details
-          </Typography>
-          <TextField
-            margin="normal"
-            fullWidth
-            required
-            id="title"
-            label="Event Title"
-            name="title"
-            autoComplete="title"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            fullWidth
-            required
-            id="location"
-            label="Location"
-            name="location"
-            autoComplete="location"
-          />
-          <TextField
-            margin="normal"
-            fullWidth
-            type="number"
-            required
-            id="limit"
-            label="Participants Limit"
-            name="limit"
-            autoComplete="limit"
-          />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateTimePicker
-              label="Select Date"
-              slotProps={{ textField: { fullWidth: true } }}
-              defaultValue={dayjs(Date.now())}
-              sx={{
-                mt: 1,
-              }}
-              name="date"
-              onChange={handleDateTimeChange}
-            />
-          </LocalizationProvider>
-          <TextField
-            margin="normal"
-            fullWidth
-            required
-            id="description"
-            label="Description"
-            name="description"
-            autoComplete="description"
-          />
-          {uploadSuccess ? (
-            <Button fullWidth variant="contained" disabled>
-              Image Uploaded Successfully
-            </Button>
-          ) : (
-            <UploadModalButton
-              onUploadSuccess={onUploadSuccess}
-              onUploadFailure={onUploadFailure}
-            ></UploadModalButton>
-          )}
-        </Grid>
-        <Grid item xs={12} sm={12} md={12}>
-          <LoadingButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            loading={
-              events.apiStatus === apiStatus.IN_PROGRESS &&
-              events.eventOperation === eventOperations.HOST_EVENT
-            }
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            xs={12}
+            sm={12}
+            md={6}
+            mt={2}
+            p={2}
           >
-            Host Event
-          </LoadingButton>
+            <Typography variant="h3" color="black" sx={{ fontSize: "38px" }}>
+              Host Details
+            </Typography>
+
+            <TextField
+              margin="normal"
+              fullWidth
+              disabled
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="Name"
+              defaultValue={auth.userData.name}
+            />
+            <TextField
+              margin="normal"
+              disabled
+              fullWidth
+              name="email"
+              label="email"
+              id="email"
+              autoComplete="email"
+              defaultValue={auth.userData.email}
+            />
+            <TextField
+              margin="normal"
+              disabled
+              fullWidth
+              id="contact"
+              label="contact"
+              name="contact"
+              autoComplete="contact"
+              defaultValue={auth.userData.contact}
+            ></TextField>
+          </Grid>
+          <Grid
+            item
+            sx={{ display: "flex", flexDirection: "column" }}
+            xs={12}
+            sm={12}
+            md={6}
+            p={2}
+          >
+            <Typography variant="h3" color="black" sx={{ fontSize: "38px" }}>
+              Event Details
+            </Typography>
+            <TextField
+              margin="normal"
+              fullWidth
+              required
+              id="title"
+              label="Event Title"
+              name="title"
+              autoComplete="title"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              required
+              id="location"
+              label="Location"
+              name="location"
+              autoComplete="location"
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              type="number"
+              required
+              id="limit"
+              label="Participants Limit"
+              name="limit"
+              autoComplete="limit"
+            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker
+                label="Select Date"
+                slotProps={{ textField: { fullWidth: true } }}
+                defaultValue={dayjs(Date.now())}
+                sx={{
+                  mt: 1,
+                }}
+                name="date"
+                onChange={handleDateTimeChange}
+              />
+            </LocalizationProvider>
+            <TextField
+              margin="normal"
+              fullWidth
+              required
+              id="description"
+              label="Description"
+              name="description"
+              autoComplete="description"
+            />
+            {uploadSuccess ? (
+              <Button fullWidth variant="contained" disabled>
+                Image Uploaded Successfully
+              </Button>
+            ) : (
+              <UploadModalButton
+                onUploadSuccess={onUploadSuccess}
+                onUploadFailure={onUploadFailure}
+              ></UploadModalButton>
+            )}
+          </Grid>
+          <Grid item xs={12} sm={12} md={12}>
+            <LoadingButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, backgroundColor: "#274A8D" }}
+              loading={
+                events.apiStatus === apiStatus.IN_PROGRESS &&
+                events.eventOperation === eventOperations.HOST_EVENT
+              }
+            >
+              Host Event
+            </LoadingButton>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     </>
   );
 }

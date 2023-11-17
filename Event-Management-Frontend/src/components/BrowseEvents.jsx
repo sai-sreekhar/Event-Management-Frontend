@@ -10,7 +10,7 @@ const BrowseEvents = () => {
       <Grid
         container
         sx={{
-          height: "100vh",
+          height: "900px",
           overflowY: "scroll",
         }}
       >
@@ -18,6 +18,7 @@ const BrowseEvents = () => {
         <SearchEvents />
         <GetAllEvents />
       </Grid>
+      <div className="text-white mt-2">EventWhiz !</div>
     </>
   );
 };

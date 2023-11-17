@@ -88,99 +88,211 @@ function ViewEventDetails() {
 
   return (
     <>
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={backdropOpen}
+      <div
+        style={{
+          height: "1000px",
+          backgroundImage:
+            "linear-gradient(#031326,#0a1a2e,rgba(7, 21, 39, 0.9))",
+        }}
       >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          {events.errorReason}
-        </Alert>
-      </Snackbar>
-
-      {events.eventDetails[eventId] && (
-        <Grid
-          container
-          display="flex"
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={backdropOpen}
         >
-          <Grid item xs={12} sm={12} md={12}>
-            <Typography variant="h2">
-              {events.eventDetails[eventId].name}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={12} md={12}>
-            <CardMedia
-              component="img"
-              height="250"
-              image={events.eventDetails[eventId].image}
-              alt="Event Image"
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={12}>
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="flex-start"
-              flexGrow={1}
+          <CircularProgress color="inherit" />
+        </Backdrop>
+
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+            {events.errorReason}
+          </Alert>
+        </Snackbar>
+
+        {events.eventDetails[eventId] && (
+          <Grid
+            container
+            display="flex"
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+          >
+            <Grid item xs={12} sm={12} md={12} mt={5}>
+              <Typography variant="h3" color="#d0d0d0">
+                {events.eventDetails[eventId].name}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} mb={5}>
+              <CardMedia
+                component="img"
+                height="400px"
+                width="auto"
+                image={events.eventDetails[eventId].image}
+                alt="Event Image"
+              />
+            </Grid>
+
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              mb={5}
+              sx={{
+                display: "flex",
+                padding: "30px",
+                backgroundImage:
+                  "linear-gradient(45deg,#2063ac,#4598EC,#DFCA9F)",
+                width: "900px",
+                height: "400px",
+                borderRadius: "10px",
+              }}
             >
-              <Typography variant="h5">
-                <b>Timing: </b>{" "}
-                {new Date(
-                  Number(events.eventDetails[eventId].date)
-                ).toUTCString()}
-              </Typography>
-              <Typography variant="h5">
-                <b>Venue: </b>
-                {events.eventDetails[eventId].location}
-              </Typography>
-              <Typography variant="h5">
-                <b>Participants Limit: </b>
-                {events.eventDetails[eventId].limit}
-              </Typography>
-              <Typography variant="h6">
-                <b>Description: </b>
-                {events.eventDetails[eventId].description}
-              </Typography>
-              <Typography variant="h6">
-                <b>Organizer: </b>
-                {events.eventDetails[eventId].hostName}
-              </Typography>
-              <Typography variant="h6">
-                <b>Contact: </b>
-                {events.eventDetails[eventId].hostContact}
-              </Typography>
-              <Typography variant="h6">
-                <b>Email: </b>
-                {events.eventDetails[eventId].hostEmail}
-              </Typography>
-              <LoadingButton
-                fullWidth
-                type="submit"
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={buyTicketHandler}
-                loading={
-                  events.apiStatus === apiStatus.IN_PROGRESS &&
-                  events.eventOperation === eventOperations.BUY_TICKET
-                }
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-start"
+                flexGrow={1}
               >
-                BUY TICKET
-              </LoadingButton>
-            </Box>
+                <Typography color="black">
+                  <b
+                    style={{
+                      fontSize: "30px",
+                      fontWeight: "30px",
+                      color: "black",
+                      fontFamily: "monospace",
+                    }}
+                  >
+                    EVENT ON:
+                  </b>{" "}
+                  <span
+                    style={{
+                      color: "black",
+                      fontSize: "27px",
+                      fontWeight: "30px",
+                    }}
+                  >
+                    {new Date(
+                      Number(events.eventDetails[eventId].date)
+                    ).toUTCString()}
+                  </span>
+                </Typography>
+
+                <Typography color="black">
+                  <b
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "30px",
+                      color: "black",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    VENUE:{" "}
+                  </b>
+                  <span style={{ fontSize: "17px", fontFamily: "cabin" }}>
+                    {events.eventDetails[eventId].location}
+                  </span>
+                </Typography>
+                <Typography color="black">
+                  <b
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "30px",
+                      color: "black",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    PARTICIPANTS LIMIT:{" "}
+                  </b>
+                  <span style={{ fontSize: "17px", fontFamily: "cabin" }}>
+                    {events.eventDetails[eventId].limit}
+                  </span>
+                </Typography>
+                <Typography
+                  style={{ marginTop: "8px", marginBottom: "20px" }}
+                  color="black"
+                >
+                  <b
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "30px",
+                      color: "black",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    DESCRIPTION:{" "}
+                  </b>
+                  <span style={{ fontSize: "17px", fontFamily: "cabin" }}>
+                    {events.eventDetails[eventId].description}
+                  </span>
+                </Typography>
+                <Typography color="black">
+                  <b
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "30px",
+                      color: "black",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    ORGANIZER:{" "}
+                  </b>
+                  <span style={{ fontSize: "17px", fontFamily: "cabin" }}>
+                    {events.eventDetails[eventId].hostName}
+                  </span>
+                </Typography>
+                <Typography color="black">
+                  <b
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "30px",
+                      color: "black",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    CONTACT:{" "}
+                  </b>
+                  <span style={{ fontSize: "17px", fontFamily: "cabin" }}>
+                    {events.eventDetails[eventId].hostContact}
+                  </span>
+                </Typography>
+                <Typography color="black">
+                  <b
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "30px",
+                      color: "black",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    EMAIL:{" "}
+                  </b>
+                  <span style={{ fontSize: "17px", fontFamily: "cabin" }}>
+                    {events.eventDetails[eventId].hostEmail}
+                  </span>
+                </Typography>
+                <LoadingButton
+                  fullWidth
+                  type="submit"
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={buyTicketHandler}
+                  loading={
+                    events.apiStatus === apiStatus.IN_PROGRESS &&
+                    events.eventOperation === eventOperations.BUY_TICKET
+                  }
+                >
+                  BUY TICKET
+                </LoadingButton>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      )}
+        )}
+      </div>
     </>
   );
 }

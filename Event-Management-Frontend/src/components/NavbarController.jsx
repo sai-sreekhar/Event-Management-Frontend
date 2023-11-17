@@ -4,7 +4,13 @@ import DashboardNavBar from "./DashboardNavBar";
 
 function NavbarController(props) {
   return (
-    <>{props.type === 1 ? <DashboardNavBar></DashboardNavBar> : <HomeNavBar></HomeNavBar>}</>
+    <>
+      {props.type === 1 ? (
+        <DashboardNavBar></DashboardNavBar>
+      ) : (
+        <HomeNavBar></HomeNavBar>
+      )}
+    </>
   );
 }
 

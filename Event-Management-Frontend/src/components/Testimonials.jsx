@@ -42,8 +42,8 @@ const Testimonials = () => {
                     <div className="CardCaption">
                       <FaQuoteLeft />
                       <br />
-                      If you trouble the trouble trouble troubles you, I'm not
-                      the trouble. I'm the truthh
+                      If you trouble the trouble trouble troubles you, I am not
+                      the trouble. I am the truthh
                       <div className="SubCaption">-Godala Sai Sreekar</div>
                     </div>
                   </div>

@@ -14,13 +14,13 @@ function BrowseEventsHeader() {
         flexDirection: "column",
         justifyContent: "flex-end",
         alignItems: "center",
-        backgroundColor: "lightblue",
+        backgroundImage: "linear-gradient(#010613,#031326)",
       }}
     >
-      <Typography variant="h4" align="center">
+      <Typography variant="h5" align="center" color="white">
         ALL UPCOMING
       </Typography>
-      <Typography variant="h4" align="center">
+      <Typography variant="h4" align="center" color="white" marginBottom="10px">
         EVENTS
       </Typography>
     </Grid>
