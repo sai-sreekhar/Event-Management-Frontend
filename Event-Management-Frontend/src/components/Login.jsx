@@ -22,10 +22,10 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function Login() {
   const [open, setOpen] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [redirectPath, setRedirectPath] = useState("/");
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const redirectPath = location.state?.path || "/";
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -37,14 +37,21 @@ export default function Login() {
       setOpen(true);
     }
 
+    if (
+      auth.apiStatus === apiStatus.SUCCESS &&
+      auth.authOperation === authOperation.LOGIN &&
+      auth.authStatus === authStatus.LOGGED_IN &&
+      auth.accessToken
+    ) {
+      navigate(redirectPath);
+    }
+
     return () => {};
   }, [auth.apiStatus, auth.authOperation, auth.authStatus]);
 
   useEffect(() => {
-    if (auth.accessToken) {
-      navigate(redirectPath); // Redirect to the specified path if the user is already authenticated
-    }
-  }, [auth]);
+    setRedirectPath(location.state?.path || "/");
+  },[]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
