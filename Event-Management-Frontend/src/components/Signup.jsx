@@ -54,14 +54,7 @@ export default function SignUp() {
     const contact = data.get("contact");
     const password = data.get("password");
     const confirmPassword = data.get("confirmPassword");
-
-    // console.log({
-    //   name: data.get("name"),
-    //   email: data.get("email"),
-    //   contact: data.get("contact"),
-    //   password: data.get("password"),
-    // });
-
+    
     // Validate the email format
     let error = false;
     if (!validateEmail(email)) {

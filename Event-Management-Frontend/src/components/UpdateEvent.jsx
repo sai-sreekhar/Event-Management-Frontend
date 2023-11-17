@@ -92,7 +92,6 @@ function UpdateEvent() {
     }
 
     const data = new FormData(event.currentTarget);
-    console.log(data);
     const eventDetails = {
       name: data.get("title"),
       location: data.get("location"),
@@ -114,7 +113,6 @@ function UpdateEvent() {
 
   const handleDateTimeChange = (newValue) => {
     setDateTime(newValue.$d.getTime());
-    console.log(dateTime);
   };
 
   return (

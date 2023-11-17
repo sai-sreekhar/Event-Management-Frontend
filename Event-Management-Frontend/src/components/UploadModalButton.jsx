@@ -34,10 +34,8 @@ class UploadModalButton extends Component {
     // Will get pre-signed URL from server API
     this.uppy.use(AwsS3, {
       getUploadParameters: async (file) => {
-        console.log("file: ", file);
 
         try {
-          console.log("accessToken: ", props);
           const body = {
             type: 1,
             eventId: uuidv4(),
@@ -122,7 +120,6 @@ class UploadModalButton extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     auth: state.auth,
   };

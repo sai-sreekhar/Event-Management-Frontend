@@ -51,7 +51,6 @@ function HostEvent() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(dateTime);
     if (dateTime < Date.now()) {
       setDateTimeError(true);
       return;
@@ -63,7 +62,6 @@ function HostEvent() {
     }
 
     const data = new FormData(event.currentTarget);
-    console.log(generatedEventId);
     const eventDetails = {
       name: data.get("title"),
       location: data.get("location"),

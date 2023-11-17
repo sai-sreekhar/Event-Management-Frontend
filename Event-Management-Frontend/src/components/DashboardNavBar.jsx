@@ -6,6 +6,7 @@ import down from "./../assets/images/down.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux";
+import withAuth from "./withAuth";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange } from "@mui/material/colors";
 
@@ -76,4 +77,4 @@ const DashboardNavBar = () => {
   );
 };
 
-export default DashboardNavBar;
+export default withAuth(DashboardNavBar);

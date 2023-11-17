@@ -63,7 +63,6 @@ function GetAllEvents() {
 
     setSnackbarOpen(false);
   };
-  console.log(events);
   return (
     <>
       <Backdrop
