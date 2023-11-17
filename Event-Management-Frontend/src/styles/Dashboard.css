@@ -6,14 +6,14 @@
 }
 
 .con {
-    background-image: url(eventmie-assets.png);
+    background-image: url("./../assets/images/eventmie-assets.png");
     background-size: 1490px 790px;
     background-repeat: repeat;
     background-blend-mode: luminosity;
 
   }
   .con-hostpage {
-    background-image: url('eventmie-assets.png');
+    background-image: url('./../assets/images/eventmie-assets.png');
     background-size: 1490px 790px;
     background-repeat: repeat;
     background-blend-mode: luminosity;
