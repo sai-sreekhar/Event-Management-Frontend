@@ -9,7 +9,7 @@ body {
   height: 100%;
 }
 .ServiceWholeBody > .container-fluid {
-  background-image: url(backgroundFull.png);
+  background-image: url("./../assets/images/backgroundFull.png");
   background-size: 1520px;
   background-repeat: repeat;
   padding-bottom: 50px;

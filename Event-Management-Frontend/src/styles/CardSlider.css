@@ -10,7 +10,7 @@ body {
 }
 
 .card {
-  background-image: url(Temp_background.png); /*Other image to be attached input*/
+  background-image: url("./../assets/images/Temp_background.png"); /*Other image to be attached input*/
   background-size: cover;
   background-repeat: no-repeat;
   width: 200px;

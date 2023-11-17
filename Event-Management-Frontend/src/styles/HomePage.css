@@ -9,7 +9,7 @@ body {
   height: 100%;
 }
 .HomeWholeBody > .container-fluid {
-  background-image: url(backgroundFull.png);
+  background-image: url(""./../assets/images/backgroundFull.png");
   background-size: 1520px;
   background-repeat: repeat;
   margin-top: 20px;

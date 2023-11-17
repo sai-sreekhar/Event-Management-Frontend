@@ -9,7 +9,7 @@ body {
   height: 100%;
 }
 .TestimonialsWholeBody > .container-fluid {
-  background-image: url(backgroundFull.png);
+  background-image: url("./../assets/images/backgroundFull.png");
   background-size: 1520px;
   height: 790px;
   background-repeat: repeat;
