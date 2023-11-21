@@ -88,7 +88,7 @@ function GetAllEvents() {
         sm={6}
         md={9}
         sx={{
-          backgroundColor: "lightblue",
+          backgroundColor: "white",
           pt: 2,
           pb: 2,
           mt: 2,

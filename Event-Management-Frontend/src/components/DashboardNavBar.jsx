@@ -3,6 +3,7 @@ import c5 from "./../assets/images/c5.jpg"; // Replace with the correct path
 import "./../styles/Dashboard.css";
 import logout from "./../assets/images/logout.png";
 import down from "./../assets/images/down.png";
+import up from "./../assets/images/up.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux";
@@ -16,7 +17,12 @@ const DashboardNavBar = () => {
   const handleDropdownClick = (e) => {
     e.currentTarget.querySelector(".dropdown-menu").classList.toggle("d-none");
   };
-
+  const UpArrow = () =>{
+    document.getElementById('ArrowImage').src=up;
+  };
+  const DownArrow = () =>{
+    document.getElementById('ArrowImage').src=down;
+  };
   return (
     <div className="nav-side-box">
       <nav>
@@ -33,7 +39,7 @@ const DashboardNavBar = () => {
         {/* <Avatar alt="Profile Image" sx={{ bgcolor: deepOrange[500] }}>
           {auth.userData ? auth.userData.name[0] : "U"}
         </Avatar> */}
-        <div className="profile-dropdown" onClick={handleDropdownClick}>
+        <div className="profile-dropdown" onClick={handleDropdownClick} onMouseLeave={DownArrow}>
           <img
             className="profile-picture rounded-circle"
             src={c5}
@@ -46,8 +52,9 @@ const DashboardNavBar = () => {
             <span className="profile-email text-white">
               {auth.userData.email}
             </span>
-            <span className="profile-img">
-              <img src={down}></img>
+            <span className="profile-img" onMouseOver={UpArrow}>
+              <img src={down}
+              id="ArrowImage"/>
             </span>
           </div>
           <div className="dropdown-menu">
@@ -61,14 +68,15 @@ const DashboardNavBar = () => {
               <p className="dropdown-item">My Bookings</p>
             </Link>
             <Link to={"/"}>
-              <img
-                id="img-lg"
-                src={logout}
-                alt="logout"
-                onClick={() => {
-                  dispatch(authActions.logout());
-                }}
-              />
+              <p className="dropdown-item mb-1" onClick={() => {
+                    dispatch(authActions.logout());
+                  }}>
+                <img
+                  id="img-lg"
+                  src={logout}
+                  alt="logout"
+                />
+              </p>
             </Link>
           </div>
         </div>

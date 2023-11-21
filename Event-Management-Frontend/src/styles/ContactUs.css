@@ -133,10 +133,11 @@ body {
 }
 .ContactWholeBody .form-control {
   border: 2px solid #6a5acd;
-  box-shadow: rgba(106, 90, 205, 0.25) 0px 54px 55px,
+  /* box-shadow: rgba(106, 90, 205, 0.25) 0px 54px 55px,
     rgba(106, 90, 205, 0.12) 0px -12px 30px,
     rgba(106, 90, 205, 0.12) 0px 4px 6px, rgba(106, 90, 205, 0.17) 0px 12px 13px,
-    rgba(106, 90, 205, 0.09) 0px -3px 5px;
+    rgba(106, 90, 205, 0.09) 0px -3px 5px; */
+    /* Paina effect antta anipichaledu so theesesa. If you want we'll */
 }
 .ContactWholeBody .image-gif {
   border-radius: 70px;

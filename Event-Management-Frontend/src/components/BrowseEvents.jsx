@@ -11,14 +11,13 @@ const BrowseEvents = () => {
         container
         sx={{
           height: "900px",
-          overflowY: "scroll",
         }}
       >
         <BrowseEventsHeader />
         <SearchEvents />
         <GetAllEvents />
       </Grid>
-      <div className="text-white mt-2">EventWhiz !</div>
+      {/* <div className="text-white mt-2">EventWhiz !</div> */}
     </>
   );
 };

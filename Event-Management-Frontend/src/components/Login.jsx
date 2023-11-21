@@ -43,6 +43,17 @@ export default function Login() {
       auth.authStatus === authStatus.LOGGED_IN &&
       auth.accessToken
     ) {
+      //if redirect path is home or service or testimonials or contactus then redirect to dashboard
+      if (
+        redirectPath === "/" ||
+        redirectPath === "/services" ||
+        redirectPath === "/testimonials" ||
+        redirectPath === "/contact"
+      ) {
+        navigate("/dashboard");
+        return;
+      }
+
       navigate(redirectPath);
     }
 
@@ -51,7 +62,7 @@ export default function Login() {
 
   useEffect(() => {
     setRedirectPath(location.state?.path || "/");
-  },[]);
+  }, []);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {

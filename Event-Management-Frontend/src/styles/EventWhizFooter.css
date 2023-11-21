@@ -1,5 +1,4 @@
 .FooterEverything {
-  width: 100%;
   background-repeat: no-repeat;
 }
 .FooterEverything .footer {
@@ -7,6 +6,7 @@
   color: white;
   background-image: linear-gradient(to right, #155f7e, #c72e76);
   background-size: 100%;
+  width: 100%;
 }
 .FooterEverything .footer-heading {
   font-size: 40px;

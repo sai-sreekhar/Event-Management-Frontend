@@ -1,7 +1,32 @@
+body{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+/* div.MuiBox-root,div.css-hbm2t4,div.css-ep8zfn{
+  width: 94.97rem;
+} */
+body::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+body::-webkit-scrollbar
+{
+	width: 16px;
+	background-color: #b2b0b0;
+}
+
+body::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8);
+  background-image: linear-gradient(to right,rgba(196, 198, 241, 0.4), rgba(206, 90, 209, 0.54))
+}
 #root {
-  width: 100vw;
-  height: 120vh;
-  margin: 0 auto;
-  text-align: center;
+  width: 100%;
+  height:130vh; 
   background-image: linear-gradient(#031326, #0a1a2e, rgba(7, 21, 39, 0.9));
 }

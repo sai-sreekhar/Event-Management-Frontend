@@ -9,8 +9,21 @@ import CardSlider from "./CardSlider";
 import Navbar from "./HomeNavBar";
 import EventWhixFooter from "./EventWhizFooter";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  useEffect(() => {
+    // call api or anything
+    var cols = document.getElementsByClassName('slick-next');
+    console.log("Given Ourput: lorebhjbhjjhbjhb",cols);
+    cols[0].style.fontSize='50px'
+    // cols[0].style.content="\2192"
+    // for(let i=0; i<cols.length; i++) {
+    //   cols[i].style.width = '450px';  
+    //   cols[i].style.marginLeft = '15px';  
+    // }
+    // console.log("loaded");
+ },[]);
   return (
     <div className="HomeWholeBody">
       <div className="container-fluid">

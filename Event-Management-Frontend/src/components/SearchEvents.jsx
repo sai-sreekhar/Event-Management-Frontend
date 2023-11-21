@@ -41,7 +41,7 @@ function SearchEvents() {
         }}
       >
         <ThemeProvider theme={defaultTheme}>
-          <Container component="main" maxWidth="xs">
+          <Container component="main" maxWidth="xs" >
             <Box
               sx={{
                 display: "flex",
@@ -63,6 +63,7 @@ function SearchEvents() {
                   label="Select Date"
                   slotProps={{ textField: { fullWidth: true } }}
                   defaultValue={dayjs("2022-04-17")}
+                  sx={{marginTop:'20px'}}
                 />
               </LocalizationProvider>
             </Box>

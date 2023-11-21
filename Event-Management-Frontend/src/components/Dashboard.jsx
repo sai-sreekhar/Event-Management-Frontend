@@ -17,7 +17,6 @@ import p3 from "./../assets/images/p3.jpeg";
 import p4 from "./../assets/images/p4.jpeg";
 import thunder from "./../assets/images/thunder.png";
 import steps from "./../assets/images/steps.png";
-import "@coreui/coreui/dist/css/coreui.min.css";
 import Event from "./EventWhizFooter";
 import { Link } from "react-router-dom";
 import {
@@ -32,10 +31,10 @@ import { useSelector } from "react-redux";
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth);
   return (
+    <>
     <div className="body-dash">
       <div className="con">
         {/* Carousel begin */}
-
         <CCarousel controls indicators transition="crossfade">
           <CCarouselItem>
             <CImage
@@ -323,6 +322,8 @@ const Dashboard = () => {
       </div>
       <Event />
     </div>
+    </>
+
   );
 };
 

@@ -86,7 +86,7 @@ const EventWhizFooter = () => {
               style={{ paddingTop: "2rem" }}
               className="footer-sub text-center footer-sub-logo"
             >
-              copyright@2022 | All rights reserved
+              copyright@2023 | All rights reserved
               <br />
               Designed and Developed by Team 19.
             </div>

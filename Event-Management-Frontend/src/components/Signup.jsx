@@ -246,7 +246,7 @@ export default function SignUp() {
                   </LoadingButton>
                   <Grid container justifyContent="center">
                     <Grid item>
-                      <Link href="/login">Already have an account? Login</Link>
+                      <Link to="/login" style={{color:'blue',paddingLeft:'290px',paddingTop:'25px'}}>Already have an account? Login</Link>
                     </Grid>
                   </Grid>
                 </Box>

@@ -90,6 +90,7 @@ const MyEvents = () => {
 
   return (
     <>
+    
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={backdropOpen}
@@ -117,7 +118,7 @@ const MyEvents = () => {
           marginTop: "-250px",
         }}
       >
-        <Typography variant="h4" align="center" marginBottom="30px">
+        <Typography variant="h3" align="center" marginBottom="30px" sx={{color:'white'}}>
           MY HOSTED EVENTS
         </Typography>
 

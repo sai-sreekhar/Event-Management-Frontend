@@ -154,7 +154,7 @@ function HostEvent() {
             width: "50%",
             borderRadius: "10px",
             marginLeft: "170px",
-            marginTop: "150px",
+            marginTop: "170px",
           }}
         >
           <Grid
@@ -164,12 +164,14 @@ function HostEvent() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
+              cursor: 'no-drop',
             }}
             xs={12}
             sm={12}
             md={6}
             mt={2}
             p={2}
+            
           >
             <Typography variant="h3" color="black" sx={{ fontSize: "38px" }}>
               Host Details

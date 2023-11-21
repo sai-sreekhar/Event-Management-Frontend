@@ -8,6 +8,7 @@ import Image5 from "./../assets/images/EventsImage5.png";
 import Image6 from "./../assets/images/EventsImage6.png";
 import Navbar from "./HomeNavBar";
 import EventWhixFooter from "./EventWhizFooter";
+import { Link } from "react-router-dom";
 const ServicePage = () => {
   return (
     <div className="ServiceWholeBody">
@@ -31,14 +32,12 @@ const ServicePage = () => {
                     className="image"
                     src={Image2}
                     alt="Your Image"
-                    width={"500rem"}
-                  />
+                    width={"500rem"}/>
                   <div className="overlay Image1">
                     <h1 className="overlayHeading">Attend</h1>
                     <h2 className="overlaySubHeading">Events</h2>
                     <p className="overlayContent">
-                      Some Description: Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Blanditiis, totam?\Lorem ipsum dolor sit{" "}
+                    Join us for a captivating experience where we bring together individuals to celebrate and engage in meaningful conversations.
                     </p>
                   </div>
                 </div>
@@ -55,8 +54,7 @@ const ServicePage = () => {
                     <h1 className="overlayHeading">Hosting</h1>
                     <h2 className="overlaySubHeading">Events</h2>
                     <p className="overlayContent">
-                      Some Description: Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Blanditiis, totam?\Lorem ipsum dolor sit{" "}
+                    Elevate your events with warmth and hospitality as we create moments of joy and connection.
                     </p>
                   </div>
                 </div>
@@ -73,8 +71,7 @@ const ServicePage = () => {
                     <h1 className="overlayHeading">Organizers</h1>
                     <h2 className="overlaySubHeading">For events</h2>
                     <p className="overlayContent">
-                      Some Description: Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Blanditiis, totam?\Lorem ipsum dolor sit{" "}
+                    Behind every successful event is a dedicated team of organizers committed to turning visions into reality.
                     </p>
                   </div>
                 </div>
@@ -93,8 +90,7 @@ const ServicePage = () => {
                     <h1 className="overlayHeading">Professional</h1>
                     <h2 className="overlaySubHeading">Planners</h2>
                     <p className="overlayContent">
-                      Some Description: Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Blanditiis, totam?\Lorem ipsum dolor sit{" "}
+                    Trust our professional planners to seamlessly transform your vision into a meticulously executed event.
                     </p>
                   </div>
                 </div>
@@ -111,8 +107,7 @@ const ServicePage = () => {
                     <h1 className="overlayHeading">Venue</h1>
                     <h2 className="overlaySubHeading">Partners</h2>
                     <p className="overlayContent">
-                      Some Description: Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Blanditiis, totam?\Lorem ipsum dolor sit{" "}
+                    Craft unforgettable experiences with our trusted venue partners, tailoring settings for seamless and memorable events.
                     </p>
                   </div>
                 </div>
@@ -129,8 +124,7 @@ const ServicePage = () => {
                     <h1 className="overlayHeading">Dashboard</h1>
                     <h2 className="overlaySubHeading">view</h2>
                     <p className="overlayContent">
-                      Some Description: Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Blanditiis, totam?\Lorem ipsum dolor sit{" "}
+                      Explore data insights on our sleek dashboard for smart decision-making and a streamlined user experience.
                     </p>
                   </div>
                 </div>

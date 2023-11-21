@@ -47,27 +47,6 @@ function App() {
   return (
     <>
       {navbarState === 1 && <DashboardNavBar></DashboardNavBar>}
-      {/*<Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          backgroundImage: `url(${backgroundImgUrl})`,
-          backgroundColor:
-            "linear-gradient(#031326,#0a1a2e,rgba(7, 21, 39, 0.9))",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "95%",
-          }}
-        > */}
       <Routes>
         <Route path="/" element={<HomePage></HomePage>} />
         <Route path="/login" element={<Login />} />
