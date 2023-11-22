@@ -84,7 +84,7 @@ const Profile = () => {
             backgroundImage: "linear-gradient(45deg,#2063ac,#4598EC,#DFCA9F)",
             width: "50%",
             borderRadius: "10px",
-            marginLeft: "170px",
+            marginLeft: "400px",
             marginTop: "75px",
           }}
         >
@@ -95,7 +95,6 @@ const Profile = () => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              cursor: "no-drop",
             }}
             xs={12}
             sm={12}
