@@ -8,6 +8,9 @@ export const authActions = {
   LOGOUT_IN_PROGRESS: '@auth/logoutInProgress',
   LOGOUT_SUCCESS: '@auth/logoutSuccess',
   LOGOUT_FAILURE: '@auth/logoutFailure',
+  UPDATE_USER_DETAILS_IN_PROGRESS: '@auth/updateUserDetailsInProgress',
+  UPDATE_USER_DETAILS_SUCCESS: '@auth/updateUserDetailsSuccess',
+  UPDATE_USER_DETAILS_FAILURE: '@auth/updateUserDetailsFailure',
 };
 
 export const apiStatus = {
@@ -21,6 +24,7 @@ export const authOperation = {
   SIGNUP: 0,
   LOGIN: 1,
   LOGOUT: 2,
+  UPDATE_USER_DETAILS: 3,
   INVALID: 3
 };
 

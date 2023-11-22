@@ -60,6 +60,26 @@ const logoutFailure = (error) => {
   };
 };
 
+const updateUserDetailsInProgress = () => {
+  return {
+    type: authActions.UPDATE_USER_DETAILS_IN_PROGRESS,
+  };
+};
+
+const updateUserDetailsSuccess = (userData) => {
+  return {
+    type: authActions.UPDATE_USER_DETAILS_SUCCESS,
+    payload: { userData },
+  };
+};
+
+const updateUserDetailsFailure = (error) => {
+  return {
+    type: authActions.UPDATE_USER_DETAILS_FAILURE,
+    payload: { error },
+  };
+};
+
 const signup = (name, email, contact, password) => {
   return async (dispatch) => {
     dispatch(signupInProgress());
@@ -130,4 +150,29 @@ const logout = () => {
   };
 };
 
-export { signup, login, logout };
+const updateUserDetails = (name, email, contact) => {
+  return async (dispatch, getState) => {
+    const accessToken = getState().auth.accessToken;
+    dispatch(updateUserDetailsInProgress());
+    try {
+      const response = await fetch(`${API_V1_BASE_URL}/users`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ name, email, contact }),
+      });
+      const data = await response.json();
+      if (data.status === "success") {
+        dispatch(updateUserDetailsSuccess(data.data.user));
+      } else {
+        dispatch(updateUserDetailsFailure(data.data.errorDesc));
+      }
+    } catch (error) {
+      dispatch(updateUserDetailsFailure(error.message));
+    }
+  };
+};
+
+export { signup, login, logout, updateUserDetails };

@@ -98,6 +98,31 @@ export default function authReducer(state = initialState, action) {
         authStatus: authStatus.LOGGED_IN,
         errorReason: action.payload.error,
       };
+    case authActions.UPDATE_USER_DETAILS_IN_PROGRESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.IN_PROGRESS,
+        authOperation: authOperation.UPDATE_USER_DETAILS,
+        authStatus: authStatus.LOGGED_IN,
+        errorReason: null,
+      };
+    case authActions.UPDATE_USER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        apiStatus: apiStatus.SUCCESS,
+        authOperation: authOperation.UPDATE_USER_DETAILS,
+        authStatus: authStatus.LOGGED_IN,
+        userData: action.payload.userData,
+        errorReason: null,
+      };
+    case authActions.UPDATE_USER_DETAILS_FAILURE:
+      return {
+        ...state,
+        apiStatus: apiStatus.FAILURE,
+        authOperation: authOperation.UPDATE_USER_DETAILS,
+        authStatus: authStatus.LOGGED_IN,
+        errorReason: action.payload.error,
+      };
     default:
       return state;
   }
