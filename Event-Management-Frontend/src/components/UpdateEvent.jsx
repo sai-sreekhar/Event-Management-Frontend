@@ -25,7 +25,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function UpdateEvent() {
   const auth = useSelector((state) => state.auth);
-  const [dateTime, setDateTime] = useState(0);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [backdropOpen, setBackdropOpen] = useState(false);
   const [dataTimeError, setDateTimeError] = useState(false);
@@ -35,6 +34,8 @@ function UpdateEvent() {
 
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events);
+  const [dateTime, setDateTime] = useState(events.eventDetails[eventId].date);
+
 
   useEffect(() => {
     dispatch(eventActions.getEventDetails(eventId));
